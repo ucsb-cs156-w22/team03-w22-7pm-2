@@ -1,4 +1,4 @@
-package main.java.edu.ucsb.cs156.example.repositories;
+package edu.ucsb.cs156.example.repositories;
 
 import edu.ucsb.cs156.example.entities.CollegiateSubreddit;
 import org.springframework.data.repository.CrudRepository;
