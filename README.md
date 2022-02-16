@@ -3,8 +3,8 @@
 # team03-w22-7pm-2
 
 Storybook is here:
-* Production: <https://github.com/ucsb-cs156-w22/team03-w22-7pm-2-docs/>
-* QA:  <https://github.com/ucsb-cs156-w22/team03-w22-7pm-2-docs-qa/>
+* Production: <https://ucsb-cs156-w22.github.io/team03-w22-7pm-2-docs//>
+* QA:  <https://ucsb-cs156-w22.github.io/team03-w22-7pm-2-docs-qa//>
 
 The GitHub actions script to deploy the Storybook to QA requires some configuration; see [docs/github-actions.md](docs/github-actions.md) for details.
 
