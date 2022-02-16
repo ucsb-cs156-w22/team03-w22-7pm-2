@@ -1,12 +1,12 @@
 import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
 
-export default function UCSBSubjectsIndexPage() {
+export default function TodosCreatePage() {
   return (
     <BasicLayout>
       <div className="pt-2">
-        <h1>UCSB Subjects</h1>
+        <h1>Todos</h1>
         <p>
-          This is where the index page will go
+          This is where the create page will go
         </p>
       </div>
     </BasicLayout>
