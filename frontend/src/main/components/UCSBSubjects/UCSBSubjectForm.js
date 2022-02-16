@@ -22,11 +22,11 @@ function UCSBSubjectForm({
   // Note that even this complex regex may still need some tweaks
 
   // Stryker disable next-line Regex
-  const isoSubject_regex =
-    /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
+  // const isoSubject_regex =
+  //   /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
 
-  // Stryker disable next-line all
-  const yyyyq_regex = /((19)|(20))\d{2}[1-4]/i; // Accepts from 1900-2099 followed by 1-4.  Close enough.
+  // // Stryker disable next-line all
+  // const yyyyq_regex = /((19)|(20))\d{2}[1-4]/i; // Accepts from 1900-2099 followed by 1-4.  Close enough.
 
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
@@ -45,56 +45,85 @@ function UCSBSubjectForm({
       )}
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="quarterYYYYQ">Quarter YYYYQ</Form.Label>
+        <Form.Label htmlFor="subjectCode">Subject Code</Form.Label>
         <Form.Control
-          data-testid="UCSBSubjectForm-quarterYYYYQ"
-          id="quarterYYYYQ"
+          data-testid="UCSBSubjectForm-subjectCode"
+          id="subjectCode"
           type="text"
-          isInvalid={Boolean(errors.quarterYYYYQ)}
-          {...register('quarterYYYYQ', {
-            required: true,
-            pattern: yyyyq_regex,
+          {...register('subjectCode', {
+            required: 'subjectCode is required.',
           })}
         />
         <Form.Control.Feedback type="invalid">
-          {errors.quarterYYYYQ && 'QuarterYYYYQ is required. '}
-          {errors.quarterYYYYQ?.type === 'pattern' &&
-            'QuarterYYYYQ must be in the format YYYYQ, e.g. 20224 for Fall 2022'}
+          {errors.subjectCode?.message}
         </Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="name">Name</Form.Label>
+        <Form.Label htmlFor="subjectTranslation">
+          Subject Translation
+        </Form.Label>
         <Form.Control
-          data-testid="UCSBSubjectForm-name"
-          id="name"
+          data-testid="UCSBSubjectForm-subjectTranslation"
+          id="subjectTranslation"
           type="text"
-          isInvalid={Boolean(errors.name)}
-          {...register('name', {
-            required: 'Name is required.',
+          isInvalid={Boolean(errors.subjectTranslation)}
+          {...register('subjectTranslation', {
+            required: 'subjectTranslation is required.',
           })}
         />
         <Form.Control.Feedback type="invalid">
-          {errors.name?.message}
+          {errors.subjectTranslation?.message}
         </Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="localSubjectTime">Subject (iso format)</Form.Label>
+        <Form.Label htmlFor="deptCode">Department Code</Form.Label>
         <Form.Control
-          data-testid="UCSBSubjectForm-localSubjectTime"
-          id="localSubjectTime"
+          data-testid="UCSBSubjectForm-deptCode"
+          id="deptCode"
           type="text"
-          isInvalid={Boolean(errors.localSubjectTime)}
-          {...register('localSubjectTime', {
-            required: true,
-            pattern: isoSubject_regex,
+          isInvalid={Boolean(errors.deptCode)}
+          {...register('deptCode', {
+            required: 'deptCode is required.',
           })}
         />
         <Form.Control.Feedback type="invalid">
-          {errors.localSubjectTime && 'LocalSubjectTime is required. '}
-          {errors.localSubjectTime?.type === 'pattern' &&
-            'localSubjectTime must be in ISO format, e.g. 2022-01-02T15:30'}
+          {errors.deptCode?.message}
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="collegeCode">Department Code</Form.Label>
+        <Form.Control
+          data-testid="UCSBSubjectForm-collegeCode"
+          id="collegeCode"
+          type="text"
+          isInvalid={Boolean(errors.collegeCode)}
+          {...register('collegeCode', {
+            required: 'collegeCode is required.',
+          })}
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.collegeCode?.message}
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="relatedDeptCode">
+          Related Department Code
+        </Form.Label>
+        <Form.Control
+          data-testid="UCSBSubjectForm-relatedDeptCode"
+          id="relatedDeptCode"
+          type="text"
+          isInvalid={Boolean(errors.relatedDeptCode)}
+          {...register('relatedDeptCode', {
+            required: 'relatedDeptCode is required.',
+          })}
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.relatedDeptCode?.message}
         </Form.Control.Feedback>
       </Form.Group>
 
