@@ -94,7 +94,7 @@ function UCSBSubjectForm({
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="collegeCode">Department Code</Form.Label>
+        <Form.Label htmlFor="collegeCode">College Code</Form.Label>
         <Form.Control
           data-testid="UCSBSubjectForm-collegeCode"
           id="collegeCode"
