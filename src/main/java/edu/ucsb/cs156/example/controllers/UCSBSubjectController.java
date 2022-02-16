@@ -6,7 +6,7 @@ import edu.ucsb.cs156.example.repositories.UCSBSubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.ResponseEntity;
-import edu.ucsb.cs156.example.services.LoggingService;
+//import edu.ucsb.cs156.example.services.LoggingService;
 import edu.ucsb.cs156.example.entities.User;
 import edu.ucsb.cs156.example.models.CurrentUser;
 import edu.ucsb.cs156.example.services.CurrentUserService;
@@ -59,7 +59,7 @@ public class UCSBSubjectController extends ApiController{
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/all")
         public Iterable<UCSBSubject> UCSBSubjectInfo() {
-            loggingService.logMethod();
+            //loggingService.logMethod();
             //UCSBSubject ucsbsub = getUCSBSubject();
             Iterable<UCSBSubject> subjects = ucsbsubjectRepository.findAll();
             return subjects;
@@ -75,7 +75,7 @@ public class UCSBSubjectController extends ApiController{
             @ApiParam("subject Code") @RequestParam String subjectCode,
             @ApiParam("related Dept Code") @RequestParam String relatedDeptCode,
             @ApiParam("inactive") @RequestParam Boolean inactive) {
-        loggingService.logMethod();
+        //loggingService.logMethod();
 
         UCSBSubject ucsbsubject = new UCSBSubject();
         ucsbsubject.setSubjectTranslation(subjectTranslation);
@@ -94,7 +94,7 @@ public class UCSBSubjectController extends ApiController{
     @GetMapping("")
     public ResponseEntity<String> getUCSBSubjectById(
         @ApiParam("id") @RequestParam Long id) throws JsonProcessingException {
-        loggingService.logMethod();
+        //loggingService.logMethod();
 
         UCSBSubjectOrError ucsbsub_error = new UCSBSubjectOrError(id);
 
@@ -113,7 +113,7 @@ public class UCSBSubjectController extends ApiController{
     public ResponseEntity<String> putSubjectById(
             @ApiParam("id") @RequestParam Long id,
             @RequestBody @Valid UCSBSubject incomingUCSBSubject) throws JsonProcessingException {
-        loggingService.logMethod();
+        //loggingService.logMethod();
         
         UCSBSubjectOrError ucsbsub_error = new UCSBSubjectOrError(id);
 
@@ -148,7 +148,7 @@ public class UCSBSubjectController extends ApiController{
     @DeleteMapping("")
     public ResponseEntity<String> deleteUCSBSubject(
             @ApiParam("id") @RequestParam Long id) {
-        loggingService.logMethod();
+        //loggingService.logMethod();
 
         UCSBSubjectOrError ucsbsub_error = new UCSBSubjectOrError(id);
 
