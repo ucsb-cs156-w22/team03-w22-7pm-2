@@ -74,6 +74,24 @@ function App() {
           )
         }
 
+        {
+          hasRole(currentUser, "ROLE_USER") && (
+            <>
+              <Route exact path="/ucsbsubjects/list" element={<UCSBSubjectsIndexPage />} />
+            </>
+          )
+        }
+        {
+          hasRole(currentUser, "ROLE_ADMIN") && (
+            <>
+              <Route exact path="/ucsbsubjects/create" element={<UCSBSubjectsCreatePage />} />
+            </>
+          )
+        }
+
+
+        
+
       </Routes>
     </BrowserRouter>
   );
