@@ -104,7 +104,10 @@ To access the swagger API endpoints, use:
     ```
 
 - On Heroku, without CLI:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 622303ed6026860555f18d75fe24d4151404b2ac
   - Upper right of dashboard, select "More" then "Run Console"
 
     <img alt="Heroku Dashboard; More; Run Console" src="https://user-images.githubusercontent.com/1119017/150204550-a1027ab8-6ce7-4770-b566-a43928f5c3a0.png" width="300" />
@@ -112,5 +115,8 @@ To access the swagger API endpoints, use:
   - Enter `psql $DATABASE_URL` and click `Run`
 
     <img alt="Enter psql $DATABASE_URL and click Run" src="https://user-images.githubusercontent.com/1119017/150206174-43193825-1afd-49f4-aeaf-cfadf0c0c6f3.png" width="400" />
+<<<<<<< HEAD
 
+=======
+>>>>>>> 622303ed6026860555f18d75fe24d4151404b2ac
 - Cheatsheet of `psql` commands: <https://www.geeksforgeeks.org/postgresql-psql-commands/>
