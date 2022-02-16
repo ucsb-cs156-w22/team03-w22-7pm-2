@@ -1,4 +1,6 @@
-# demo-spring-react-example-v2: dsre-v2
+[![codecov](https://codecov.io/gh/ucsb-cs156-w22/team03-w22-7pm-2/branch/main/graph/badge.svg?token=uVHg6Vhm0f)](https://codecov.io/gh/ucsb-cs156-w22/team03-w22-7pm-2)
+
+# team03-w22-7pm-2
 
 Storybook is here:
 * Production: <https://ucsb-cs156-w22.github.io/STARTER-team03-docs/>
