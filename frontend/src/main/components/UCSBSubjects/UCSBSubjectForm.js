@@ -21,13 +21,13 @@ function UCSBSubjectForm({
   // For explanation, see: https://stackoverflow.com/questions/3143070/javascript-regex-iso-Subjecttime
   // Note that even this complex regex may still need some tweaks
 
-  // Stryker disable next-line Regex
-  // const isoSubject_regex =
-  //   /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
+  /** Stryker disable next-line Regex
+  const isoSubject_regex =
+    /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
 
-  // // Stryker disable next-line all
-  // const yyyyq_regex = /((19)|(20))\d{2}[1-4]/i; // Accepts from 1900-2099 followed by 1-4.  Close enough.
-
+  Stryker disable next-line all
+  const yyyyq_regex = /((19)|(20))\d{2}[1-4]/i; // Accepts from 1900-2099 followed by 1-4.  Close enough.
+*/
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
       {initialUCSBSubject && (
@@ -50,6 +50,7 @@ function UCSBSubjectForm({
           data-testid="UCSBSubjectForm-subjectCode"
           id="subjectCode"
           type="text"
+          isInvalid={Boolean(errors.subjectCode)}
           {...register('subjectCode', {
             required: 'subjectCode is required.',
           })}
