@@ -94,36 +94,36 @@ describe('UCSBSubjectForm tests', () => {
     );
 
     const subjectCodeField = getByTestId('UCSBSubjectForm-subjectCode');
-    const nameField = getByTestId('UCSBSubjectForm-name');
-    const localSubjectTimeField = getByTestId(
-      'UCSBSubjectForm-localSubjectTime'
+    const subjectTranslationField = getByTestId(
+      'UCSBSubjectForm-subjectTranslation'
     );
+    const deptCodeField = getByTestId('UCSBSubjectForm-deptCode');
+    const collegeCodeField = getByTestId('UCSBSubjectForm-collegeCode');
+    const relatedDeptCode = getByTestId('UCSBSubjectForm-relatedDeptCode');
     const submitButton = getByTestId('UCSBSubjectForm-submit');
 
-    fireEvent.change(subjectCodeField, { target: { value: '20221' } });
-    fireEvent.change(nameField, { target: { value: 'noon on January 2nd' } });
-    fireEvent.change(localSubjectTimeField, {
-      target: { value: '2022-01-02T12:00' },
+    fireEvent.change(subjectCodeField, { target: { value: 'A' } });
+    fireEvent.change(subjectTranslationField, {
+      target: { value: 'English Language' },
+    });
+    fireEvent.change(deptCodeField, {
+      target: { value: 'English' },
+    });
+    fireEvent.change(collegeCodeField, { target: { value: 'L&S' } });
+    fireEvent.change(relatedDeptCode, {
+      target: { value: 'Letters & Sciences' },
     });
     fireEvent.click(submitButton);
 
     await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
 
-    expect(getByText(/subjectCode is required/))
-      .toBeInTheDocument()
-      .not.toBeInTheDocument();
-    expect(getByText(/subjectTranslation is required/))
-      .toBeInTheDocument()
-      .not.toBeInTheDocument();
-    expect(getByText(/deptCode is required/))
-      .toBeInTheDocument()
-      .not.toBeInTheDocument();
-    expect(getByText(/collegeCode is required/))
-      .toBeInTheDocument()
-      .not.toBeInTheDocument();
-    expect(getByText(/relatedDeptCode is required/))
-      .toBeInTheDocument()
-      .not.toBeInTheDocument();
+    expect(queryByText(/subjectCode is required/)).not.toBeInTheDocument();
+    expect(
+      queryByText(/subjectTranslation is required/)
+    ).not.toBeInTheDocument();
+    expect(queryByText(/deptCode is required/)).not.toBeInTheDocument();
+    expect(queryByText(/collegeCode is required/)).not.toBeInTheDocument();
+    expect(queryByText(/relatedDeptCode is required/)).not.toBeInTheDocument();
   });
 
   test('Test that navigate(-1) is called when Cancel is clicked', async () => {
