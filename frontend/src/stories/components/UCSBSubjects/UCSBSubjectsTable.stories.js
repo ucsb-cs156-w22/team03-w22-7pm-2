@@ -20,10 +20,10 @@ Empty.args = {
     subjects: []
 };
 
-export const OneSubject = Template.bind({});
+export const ThreeSubjects = Template.bind({});
 
-OneSubject.args = {
-    subjects: ucsbSubjectsFixtures.oneSubject
+ThreeSubjects.args = {
+    subjects: ucsbSubjectsFixtures.threeSubjects
 };
 
 
