@@ -74,16 +74,16 @@ describe("UCSBSubjectsCreatePage tests", () => {
         );
 
         await waitFor(() => {
-            expect(getByTestId("UCSBSubjectsForm-subjectCode")).toBeInTheDocument();
+            expect(getByTestId("UCSBSubjectForm-subjectCode")).toBeInTheDocument();
         });
 
-        const subjectCodeField = getByTestId("UCSBSubjectsForm-subjectCode");
-        const subjectTranslationField = getByTestId("UCSBSubjectsForm-subjectTranslation");
-        const deptCodeField = getByTestId("UCSBSubjectsForm-deptCode");
-        const collegeCodeField = getByTestId("UCSBSubjectsForm-collegeCode");
-        const relatedDeptCodeField = getByTestId("UCSBSubjectsForm-relatedDeptCode");
-        const inactiveField = getByTestId("UCSBSubjectsForm-inactive");
-        const submitButton = getByTestId("UCSBSubjectsForm-submit");
+        const subjectCodeField = getByTestId("UCSBSubjectForm-subjectCode");
+        const subjectTranslationField = getByTestId("UCSBSubjectForm-subjectTranslation");
+        const deptCodeField = getByTestId("UCSBSubjectForm-deptCode");
+        const collegeCodeField = getByTestId("UCSBSubjectForm-collegeCode");
+        const relatedDeptCodeField = getByTestId("UCSBSubjectForm-relatedDeptCode");
+        const inactiveField = getByTestId("UCSBSubjectForm-inactive");
+        const submitButton = getByTestId("UCSBSubjectForm-submit");
 
         fireEvent.change(subjectCodeField, { target: { value: 'PHIL' } });
         fireEvent.change(subjectTranslationField, { target: { value: 'Philosophy' } });
