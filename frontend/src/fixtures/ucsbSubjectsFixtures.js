@@ -5,7 +5,7 @@ const ucsbSubjectsFixtures = {
         "subjectTranslation": "Anthropology",
         "deptCode": "ANTH",
         "collegeCode": "L&S",
-        "relatedDeptCode": "ANTH",
+        "relatedDeptCode": "null",
         "inactive": false
     },
     threeSubjects: [
@@ -15,7 +15,7 @@ const ucsbSubjectsFixtures = {
             "subjectTranslation": "Anthropology",
             "deptCode": "ANTH",
             "collegeCode": "L&S",
-            "relatedDeptCode": "ANTH",
+            "relatedDeptCode": "null",
             "inactive": false
         },
         {
@@ -24,7 +24,7 @@ const ucsbSubjectsFixtures = {
             "subjectTranslation": "Computer Science",
             "deptCode": "CMPSC",
             "collegeCode": "COE",
-            "relatedDeptCode": "CMPSC",
+            "relatedDeptCode": "null",
             "inactive": false
         },
         {
@@ -33,7 +33,7 @@ const ucsbSubjectsFixtures = {
             "subjectTranslation": "Philosophy",
             "deptCode": "PHIL",
             "collegeCode": "L&S",
-            "relatedDeptCode": "PHIL",
+            "relatedDeptCode": "null",
             "inactive": true
         }
     ]

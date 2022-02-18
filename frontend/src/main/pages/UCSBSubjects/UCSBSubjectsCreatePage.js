@@ -1,13 +1,52 @@
 import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
+import UCSBSubjectForm from "main/components/UCSBSubjects/UCSBSubjectsForm";
+import { Navigate } from 'react-router-dom'
+import { useBackendMutation } from "main/utils/useBackend";
+import { toast } from "react-toastify";
 
-export default function TodosCreatePage() {
+export default function UCSBSubjectsCreatePage() {
+
+  const objectToAxiosParams = (ucsbSubject) => ({
+    url: "/api/UCSBSubjects/post",
+    method: "POST",
+    params: {
+      subjectCode: ucsbSubject.subjectCode,
+      subjectTranslation: ucsbSubject.subjectTranslation,
+      deptCode: ucsbSubject.deptCode,
+      collegeCode: ucsbSubject.collegeCode,
+      relatedDeptCode: ucsbSubject.relatedDeptCode,
+      inactive: ucsbSubject.inactive
+    }
+  });
+
+  const onSuccess = (ucsbSubject) => {
+    toast(`New ucsbSubject Created - id: ${ucsbSubject.id} subjectCode: ${ucsbSubject.subjectCode}`);
+  }
+
+  const mutation = useBackendMutation(
+    objectToAxiosParams,
+     { onSuccess }, 
+     // Stryker disable next-line all : hard to set up test for caching
+     ["/api/UCSBSubjects/all"]
+     );
+
+  const { isSuccess } = mutation
+
+  const onSubmit = async (data) => {
+    mutation.mutate(data);
+  }
+
+  if (isSuccess) {
+    return <Navigate to="/UCSBSubjects/list" />
+  }
+
   return (
     <BasicLayout>
       <div className="pt-2">
-        <h1>Todos</h1>
-        <p>
-          This is where the create page will go
-        </p>
+        <h1>Create New UCSBSubject</h1>
+
+        <UCSBSubjectForm submitAction={onSubmit} />
+
       </div>
     </BasicLayout>
   )

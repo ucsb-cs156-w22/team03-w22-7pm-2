@@ -8,7 +8,7 @@ import { useCurrentUser } from 'main/utils/currentUser'
 export default function UCSBSubjectsIndexPage() {
   const currentUser = useCurrentUser();
 
-  const { data: sujects, error: _error, status: _status } =
+  const { data: subjects, error: _error, status: _status } =
     useBackend(
       // Stryker disable next-line all : don't test internal caching of React Query
       ["/api/UCSBSubjects/all"],
