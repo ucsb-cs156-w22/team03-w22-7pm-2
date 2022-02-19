@@ -55,6 +55,9 @@ public class UCSBSubjectController extends ApiController{
     @Autowired
     ObjectMapper mapper;
 
+    @Autowired
+     LoggingService loggingService;
+
     @ApiOperation(value = "Get a list of UCSB subjects")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/all")

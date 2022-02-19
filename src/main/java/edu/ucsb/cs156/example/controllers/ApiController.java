@@ -21,9 +21,6 @@ public abstract class ApiController {
   @Autowired
   private CurrentUserService currentUserService;
 
-  @Autowired
-  protected LoggingService loggingService;
-
   protected CurrentUser getCurrentUser() {
     return currentUserService.getCurrentUser();
   }
