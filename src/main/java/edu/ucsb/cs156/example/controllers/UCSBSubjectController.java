@@ -6,7 +6,6 @@ import edu.ucsb.cs156.example.repositories.UCSBSubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.ResponseEntity;
-//import edu.ucsb.cs156.example.services.LoggingService;
 import edu.ucsb.cs156.example.entities.User;
 import edu.ucsb.cs156.example.models.CurrentUser;
 import edu.ucsb.cs156.example.services.CurrentUserService;
@@ -55,8 +54,6 @@ public class UCSBSubjectController extends ApiController{
     @Autowired
     ObjectMapper mapper;
 
-    //@Autowired
-     //LoggingService loggingService;
 
     @ApiOperation(value = "Get a list of UCSB subjects")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -93,7 +90,6 @@ public class UCSBSubjectController extends ApiController{
 
     @ApiOperation(value = "Get a UCSB Subject with given id")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-
     @GetMapping("")
     public ResponseEntity<String> getUCSBSubjectById(
         @ApiParam("id") @RequestParam Long id) throws JsonProcessingException {

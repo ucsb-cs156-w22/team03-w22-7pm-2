@@ -6,7 +6,7 @@ const ucsbSubjectsFixtures = {
         "deptCode": "ANTH",
         "collegeCode": "L&S",
         "relatedDeptCode": "null",
-        "inactive": false
+        "inactive": "false"
     },
     threeSubjects: [
         {
@@ -16,7 +16,7 @@ const ucsbSubjectsFixtures = {
             "deptCode": "ANTH",
             "collegeCode": "L&S",
             "relatedDeptCode": "null",
-            "inactive": false
+            "inactive": "false"
         },
         {
             "id": 2,
@@ -25,7 +25,7 @@ const ucsbSubjectsFixtures = {
             "deptCode": "CMPSC",
             "collegeCode": "COE",
             "relatedDeptCode": "null",
-            "inactive": false
+            "inactive": "false"
         },
         {
             "id": 3,
@@ -34,7 +34,7 @@ const ucsbSubjectsFixtures = {
             "deptCode": "PHIL",
             "collegeCode": "L&S",
             "relatedDeptCode": "null",
-            "inactive": true
+            "inactive": "true"
         }
     ]
 };

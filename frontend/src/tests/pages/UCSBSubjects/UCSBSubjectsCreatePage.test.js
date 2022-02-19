@@ -60,7 +60,7 @@ describe("UCSBSubjectsCreatePage tests", () => {
             deptCode: "PHIL",
             collegeCode: "L&S",
             relatedDeptCode: "null",
-            inactive: false,
+            inactive: "false",
         };
 
         axiosMock.onPost("/api/UCSBSubjects/post").reply( 202, ucsbSubject );
