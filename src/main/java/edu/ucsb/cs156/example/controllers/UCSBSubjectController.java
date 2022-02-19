@@ -165,4 +165,5 @@ public class UCSBSubjectController extends ApiController{
         return ResponseEntity.ok().body(String.format("ucsb subject with id %d deleted", id));
 
     }
+}
 
