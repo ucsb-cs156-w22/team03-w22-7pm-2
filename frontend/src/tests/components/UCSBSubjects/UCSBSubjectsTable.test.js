@@ -102,6 +102,8 @@ describe("UserTable tests", () => {
 
   });
 
+  /*
+
   test("Edit button navigates to the edit page for admin user", async () => {
 
     const currentUser = currentUserFixtures.adminUser;
@@ -149,7 +151,7 @@ describe("UserTable tests", () => {
     await waitFor(() => expect(mockedMutate).toHaveBeenCalledTimes(1));
 
 
-  });
+  });*/
 
 });
 
