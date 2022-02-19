@@ -275,5 +275,6 @@ public class UCSBSubjectControllerTests extends ControllerTestCase {
                 String responseString = response.getResponse().getContentAsString();
                 assertEquals("ucsb subject with id 15 not found", responseString);
         }
+}
 
 
