@@ -55,14 +55,14 @@ public class UCSBSubjectController extends ApiController{
     @Autowired
     ObjectMapper mapper;
 
-    @Autowired
-     LoggingService loggingService;
+    //@Autowired
+     //LoggingService loggingService;
 
     @ApiOperation(value = "Get a list of UCSB subjects")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/all")
         public Iterable<UCSBSubject> UCSBSubjectInfo() {
-            loggingService.logMethod();
+            //loggingService.logMethod();
             //UCSBSubject ucsbsub = getUCSBSubject();
             Iterable<UCSBSubject> subjects = ucsbsubjectRepository.findAll();
             return subjects;
@@ -78,7 +78,7 @@ public class UCSBSubjectController extends ApiController{
             @ApiParam("subject Code") @RequestParam String subjectCode,
             @ApiParam("related Dept Code") @RequestParam String relatedDeptCode,
             @ApiParam("inactive") @RequestParam Boolean inactive) {
-        loggingService.logMethod();
+        //loggingService.logMethod();
 
         UCSBSubject ucsbsubject = new UCSBSubject();
         ucsbsubject.setSubjectTranslation(subjectTranslation);
@@ -97,7 +97,7 @@ public class UCSBSubjectController extends ApiController{
     @GetMapping("")
     public ResponseEntity<String> getUCSBSubjectById(
         @ApiParam("id") @RequestParam Long id) throws JsonProcessingException {
-        loggingService.logMethod();
+        //loggingService.logMethod();
 
         UCSBSubjectOrError ucsbsub_error = new UCSBSubjectOrError(id);
 
@@ -116,7 +116,7 @@ public class UCSBSubjectController extends ApiController{
     public ResponseEntity<String> putSubjectById(
             @ApiParam("id") @RequestParam Long id,
             @RequestBody @Valid UCSBSubject incomingUCSBSubject) throws JsonProcessingException {
-        loggingService.logMethod();
+        //loggingService.logMethod();
         
         UCSBSubjectOrError ucsbsub_error = new UCSBSubjectOrError(id);
 
@@ -151,7 +151,7 @@ public class UCSBSubjectController extends ApiController{
     @DeleteMapping("")
     public ResponseEntity<String> deleteUCSBSubject(
             @ApiParam("id") @RequestParam Long id) {
-        loggingService.logMethod();
+        //loggingService.logMethod();
 
         UCSBSubjectOrError ucsbsub_error = new UCSBSubjectOrError(id);
 
