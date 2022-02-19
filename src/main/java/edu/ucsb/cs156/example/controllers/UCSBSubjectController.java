@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.ResponseEntity;
 import edu.ucsb.cs156.example.services.LoggingService;
+
 import edu.ucsb.cs156.example.entities.User;
 import edu.ucsb.cs156.example.models.CurrentUser;
 import edu.ucsb.cs156.example.services.CurrentUserService;
@@ -59,6 +60,7 @@ public class UCSBSubjectController extends ApiController{
     @GetMapping("/all")
         public Iterable<UCSBSubject> UCSBSubjectInfo() {
             loggingService.logMethod();
+
             //UCSBSubject ucsbsub = getUCSBSubject();
             Iterable<UCSBSubject> subjects = ucsbsubjectRepository.findAll();
             return subjects;
@@ -75,6 +77,7 @@ public class UCSBSubjectController extends ApiController{
             @ApiParam("related Dept Code") @RequestParam String relatedDeptCode,
             @ApiParam("inactive") @RequestParam Boolean inactive) {
         loggingService.logMethod();
+
 
         UCSBSubject ucsbsubject = new UCSBSubject();
         ucsbsubject.setSubjectTranslation(subjectTranslation);
@@ -95,6 +98,7 @@ public class UCSBSubjectController extends ApiController{
         @ApiParam("id") @RequestParam Long id) throws JsonProcessingException {
         loggingService.logMethod();
 
+
         UCSBSubjectOrError ucsbsub_error = new UCSBSubjectOrError(id);
 
         ucsbsub_error = doesUCSBSubjectExist(ucsbsub_error);
@@ -113,6 +117,7 @@ public class UCSBSubjectController extends ApiController{
             @ApiParam("id") @RequestParam Long id,
             @RequestBody @Valid UCSBSubject incomingUCSBSubject) throws JsonProcessingException {
         loggingService.logMethod();
+
         
         UCSBSubjectOrError ucsbsub_error = new UCSBSubjectOrError(id);
 
@@ -161,4 +166,3 @@ public class UCSBSubjectController extends ApiController{
 
     }
 
-}
