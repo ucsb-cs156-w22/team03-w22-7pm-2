@@ -102,7 +102,7 @@ describe("UserTable tests", () => {
 
   });
 
-  /*
+  
 
   test("Edit button navigates to the edit page for admin user", async () => {
 
@@ -151,7 +151,7 @@ describe("UserTable tests", () => {
     await waitFor(() => expect(mockedMutate).toHaveBeenCalledTimes(1));
 
 
-  });*/
+  });
 
 });
 

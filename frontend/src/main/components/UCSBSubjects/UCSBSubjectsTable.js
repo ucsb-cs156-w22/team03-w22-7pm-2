@@ -58,11 +58,11 @@ export default function UCSBSubjetsTable({ subjects, currentUser }) {
         },
     ];
 
-/*    if (hasRole(currentUser, "ROLE_ADMIN")) {
+    if (hasRole(currentUser, "ROLE_ADMIN")) {
         columns.push(ButtonColumn("Edit", "primary", editCallback, "UCSBSubjectsTable"));
         columns.push(ButtonColumn("Delete", "danger", deleteCallback, "UCSBSubjectsTable"));
     } 
-*/
+
     // Stryker disable next-line ArrayDeclaration : [columns] is a performance optimization
     const memoizedColumns = React.useMemo(() => columns, [columns]);
     const memoizedSubjects = React.useMemo(() => subjects, [subjects]);
