@@ -45,10 +45,8 @@ describe('UCSBSubjectForm tests', () => {
     );
     const subjectCodeField = getByTestId('UCSBSubjectForm-subjectCode');
     const submitButton = getByTestId('UCSBSubjectForm-submit');
-
     fireEvent.change(subjectCodeField, { target: { value: 'bad-input' } });
     fireEvent.click(submitButton);
-
     await waitFor(() =>
       expect(getByText(/subjectCode is required/)).toBeInTheDocument()
     );
@@ -73,12 +71,14 @@ describe('UCSBSubjectForm tests', () => {
     fireEvent.click(submitButton);
 
     await waitFor(() =>
-      expect(getByText(/subjectCode is required/)).toBeInTheDocument()
+      expect(getByText(/subjectCode is required./)).toBeInTheDocument()
     );
-    expect(getByText(/subjectTranslation is required/)).toBeInTheDocument();
-    expect(getByText(/deptCode is required/)).toBeInTheDocument();
-    expect(getByText(/collegeCode is required/)).toBeInTheDocument();
-    expect(getByText(/relatedDeptCode is required/)).toBeInTheDocument();
+    expect(getByText(/subjectTranslation is required./)).toBeInTheDocument();
+    expect(getByText(/deptCode is required./)).toBeInTheDocument();
+    expect(getByText(/collegeCode is required./)).toBeInTheDocument();
+    expect(getByText(/relatedDeptCode is required./)).toBeInTheDocument();
+    expect(getByText(/inactive is required./)).toBeInTheDocument();
+
   });
 
   test('No Error messsages on good input', async () => {
@@ -99,31 +99,30 @@ describe('UCSBSubjectForm tests', () => {
     );
     const deptCodeField = getByTestId('UCSBSubjectForm-deptCode');
     const collegeCodeField = getByTestId('UCSBSubjectForm-collegeCode');
-    const relatedDeptCode = getByTestId('UCSBSubjectForm-relatedDeptCode');
+    const relatedDeptCodeField = getByTestId('UCSBSubjectForm-relatedDeptCode');
+    const inactiveField = getByTestId('UCSBSubjectForm-inactive');
+
     const submitButton = getByTestId('UCSBSubjectForm-submit');
 
     fireEvent.change(subjectCodeField, { target: { value: 'A' } });
-    fireEvent.change(subjectTranslationField, {
-      target: { value: 'English Language' },
-    });
-    fireEvent.change(deptCodeField, {
-      target: { value: 'English' },
-    });
+    fireEvent.change(subjectTranslationField, { target: { value: 'English Language' },});
+    fireEvent.change(deptCodeField, {target: { value: 'English' },});
     fireEvent.change(collegeCodeField, { target: { value: 'L&S' } });
-    fireEvent.change(relatedDeptCode, {
-      target: { value: 'Letters & Sciences' },
-    });
+    fireEvent.change(relatedDeptCodeField, { target: { value: 'Letters & Sciences' }, });
+    fireEvent.change(inactiveField, { target: { value: false },});
     fireEvent.click(submitButton);
 
     await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
 
-    expect(queryByText(/subjectCode is required/)).not.toBeInTheDocument();
+    expect(queryByText(/subjectCode is required./)).not.toBeInTheDocument();
     expect(
-      queryByText(/subjectTranslation is required/)
+      queryByText(/subjectTranslation is required./)
     ).not.toBeInTheDocument();
-    expect(queryByText(/deptCode is required/)).not.toBeInTheDocument();
-    expect(queryByText(/collegeCode is required/)).not.toBeInTheDocument();
-    expect(queryByText(/relatedDeptCode is required/)).not.toBeInTheDocument();
+    expect(queryByText(/deptCode is required./)).not.toBeInTheDocument();
+    expect(queryByText(/collegeCode is required./)).not.toBeInTheDocument();
+    expect(queryByText(/relatedDeptCode is required./)).not.toBeInTheDocument();
+    expect(queryByText(/inactive is required./)).not.toBeInTheDocument();
+
   });
 
   test('Test that navigate(-1) is called when Cancel is clicked', async () => {
