@@ -16,11 +16,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Metadata {
+public class Feature {
     @Id
     private String _id;
 
     private String type;
-    private Metadata metadata;
-    private List<Feature> features;
+    private FeatureProperties properties;
+    private String id;
 }
