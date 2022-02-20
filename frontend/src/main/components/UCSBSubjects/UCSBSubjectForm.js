@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
@@ -24,7 +25,6 @@ function UCSBSubjectForm({
   /** Stryker disable next-line Regex
   const isoSubject_regex =
     /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
-
   Stryker disable next-line all
   const yyyyq_regex = /((19)|(20))\d{2}[1-4]/i; // Accepts from 1900-2099 followed by 1-4.  Close enough.
 */
@@ -125,6 +125,25 @@ function UCSBSubjectForm({
         />
         <Form.Control.Feedback type="invalid">
           {errors.relatedDeptCode?.message}
+        </Form.Control.Feedback>
+      </Form.Group>
+
+
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="inactive">
+          Inactive
+        </Form.Label>
+        <Form.Control
+          data-testid="UCSBSubjectForm-inactive"
+          id="inactive"
+          type="text"
+          isInvalid={Boolean(errors.inactive)}
+          {...register('inactive', {
+            required: 'inactive is required.',
+          })}
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.inactive?.message}
         </Form.Control.Feedback>
       </Form.Group>
 
