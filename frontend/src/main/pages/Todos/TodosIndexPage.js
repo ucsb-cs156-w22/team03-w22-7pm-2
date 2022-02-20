@@ -1,6 +1,6 @@
 import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
 
-export default function TodosIndexPage() {
+export default function UCSBSubjectsIndexPage() {
   return (
     <BasicLayout>
       <div className="pt-2">
