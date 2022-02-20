@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
@@ -125,25 +124,6 @@ function UCSBSubjectForm({
         />
         <Form.Control.Feedback type="invalid">
           {errors.relatedDeptCode?.message}
-        </Form.Control.Feedback>
-      </Form.Group>
-
-
-      <Form.Group className="mb-3">
-        <Form.Label htmlFor="inactive">
-          Inactive
-        </Form.Label>
-        <Form.Control
-          data-testid="UCSBSubjectForm-inactive"
-          id="inactive"
-          type="text"
-          isInvalid={Boolean(errors.inactive)}
-          {...register('inactive', {
-            required: 'inactive is required.',
-          })}
-        />
-        <Form.Control.Feedback type="invalid">
-          {errors.inactive?.message}
         </Form.Control.Feedback>
       </Form.Group>
 
