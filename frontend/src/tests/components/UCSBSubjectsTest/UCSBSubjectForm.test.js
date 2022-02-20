@@ -13,7 +13,7 @@ jest.mock('react-router-dom', () => ({
 describe('UCSBSubjectForm tests', () => {
   test('renders correctly ', async () => {
     const { getByText } = render(
-      <Router>
+      <Router> 
         <UCSBSubjectForm />
       </Router>
     );
