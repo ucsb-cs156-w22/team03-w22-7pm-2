@@ -74,6 +74,22 @@ function App() {
           )
         }
 
+        {
+          hasRole(currentUser, "ROLE_USER") && (
+            <>
+              <Route exact path="/collegiatesubreddits/list" element={<CollegiateSubredditsIndexPage />} />
+            </>
+          )
+        }
+        {
+          hasRole(currentUser, "ROLE_ADMIN") && (
+            <>
+              <Route exact path="/collegiatesubreddits/edit/:id" element={<UCollegiateSubredditsEditPage />} />
+              <Route exact path="/collegiatesubreddits/create" element={<CollegiateSubredditsCreatePage />} />
+            </>
+          )
+        }
+
       </Routes>
     </BrowserRouter>
   );
