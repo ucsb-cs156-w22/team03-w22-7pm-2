@@ -44,7 +44,7 @@ describe('EarthquakesTable tests', () => {
     );
   });
 
-  test('Has the expected colum headers and content for adminUser', () => {
+  test('Has the expected column headers and content for adminUser', () => {
     const currentUser = currentUserFixtures.adminUser;
 
     const { getByText, getByTestId } = render(
@@ -78,11 +78,11 @@ describe('EarthquakesTable tests', () => {
     expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
       'abcd5678abcd5678abcd5678'
     );
-    expect(getByTestId(`${testId}-cell-row-0-col-firstName`)).toHaveTextContent(
-      'Chris'
+    expect(getByTestId(`${testId}-cell-row-0-col-Title`)).toHaveTextContent(
+      'M 2.2 - 10km ESE of Ojai, CA'
     );
-    expect(getByTestId(`${testId}-cell-row-1-col-firstName`)).toHaveTextContent(
-      'Seth'
+    expect(getByTestId(`${testId}-cell-row-1-col-Title`)).toHaveTextContent(
+      'M 6.9 - 21km S of Cupertino, CA'
     );
   });
 });

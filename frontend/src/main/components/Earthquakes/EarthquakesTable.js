@@ -2,7 +2,7 @@ import React from 'react';
 import OurTable from 'main/components/OurTable';
 import { Link } from 'react-router-dom';
 
-export default function EarthquakesTable({ students, currentUser }) {
+export default function EarthquakesTable({ earthquakes, currentUser }) {
   const columns = [
     {
       Header: 'id',
@@ -26,14 +26,14 @@ export default function EarthquakesTable({ students, currentUser }) {
     },
   ];
 
-  // Stryker disable ArrayDeclaration : [columns] and [students] are performance optimization; mutation preserves correctness
+  // Stryker disable ArrayDeclaration : [columns] and [Earthquakes] are performance optimization; mutation preserves correctness
   const memoizedColumns = React.useMemo(() => columns, [columns]);
-  const memoizedDates = React.useMemo(() => students, [students]);
+  const memoizedEarthquakes = React.useMemo(() => earthquakes, [earthquakes]);
   // Stryker enable ArrayDeclaration
 
   return (
     <OurTable
-      data={memoizedDates}
+      data={memoizedEarthquakes}
       columns={memoizedColumns}
       testid={'EarthquakesTable'}
     />
