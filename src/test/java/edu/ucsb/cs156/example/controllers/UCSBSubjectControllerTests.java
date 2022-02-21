@@ -44,19 +44,19 @@ public class UCSBSubjectControllerTests extends ControllerTestCase {
 
 
         //test for /all endpoint
-    @WithMockUser(roles = { "USER" })
+    @WithMockUser(roles = { "ADMIN" })
     @Test
     public void api_all() throws Exception {
 
         // arrange
         UCSBSubject subject1 = UCSBSubject.builder().subjectTranslation("ST 1").deptCode("DC 1").collegeCode("CC 1").subjectCode("SC 1").relatedDeptCode("RDC 1").inactive(false).build();
-        //UCSBSubject subject2 = UCSBSubject.builder().subjectTranslation("ST 2").deptCode("DC 2").collegeCode("CC 2").subjectCode("SC 2").relatedDeptCode("RDC 2").inactive(false).build();
-        //UCSBSubject subject3 = UCSBSubject.builder().subjectTranslation("ST 3").deptCode("DC 3").collegeCode("CC 3").subjectCode("SC 3").relatedDeptCode("RDC 3").inactive(false).build();
+        UCSBSubject subject2 = UCSBSubject.builder().subjectTranslation("ST 2").deptCode("DC 2").collegeCode("CC 2").subjectCode("SC 2").relatedDeptCode("RDC 2").inactive(false).build();
+        UCSBSubject subject3 = UCSBSubject.builder().subjectTranslation("ST 3").deptCode("DC 3").collegeCode("CC 3").subjectCode("SC 3").relatedDeptCode("RDC 3").inactive(false).build();
 
-        ArrayList<UCSBSubject> subjects = new ArrayList<>();
-        //expectedUCSBSubjects.addAll(Arrays.asList(subject1, subject2, subject3));
+        ArrayList<UCSBSubject> expectedUCSBSubjects = new ArrayList<>();
+        expectedUCSBSubjects.addAll(Arrays.asList(subject1, subject2, subject3));
 
-        when(ucsbsubjectCollection.findAll()).thenReturn(subjects);
+        when(ucsbsubjectCollection.findAll()).thenReturn(expectedUCSBSubjects);
 
         // act
         MvcResult response = mockMvc.perform(get("/api/UCSBSubjects/all"))
@@ -65,14 +65,14 @@ public class UCSBSubjectControllerTests extends ControllerTestCase {
         // assert
 
         verify(ucsbsubjectCollection, times(1)).findAll();
-        String expectedJson = mapper.writeValueAsString(subjects);
+        String expectedJson = mapper.writeValueAsString(expectedUCSBSubjects);
         String responseString = response.getResponse().getContentAsString();
         assertEquals(expectedJson, responseString);
     }
 
 
         //tests for /post endpoint
-    @WithMockUser(roles = { "USER" })
+    @WithMockUser(roles = { "ADMIN" })
     @Test
     public void api_post() throws Exception {
         // arrange
