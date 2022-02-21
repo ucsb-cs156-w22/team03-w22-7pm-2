@@ -141,10 +141,10 @@ export default function AppNavbar({
                   </NavDropdown.Item>
                   {hasRole(currentUser, 'ROLE_ADMIN') && (
                     <NavDropdown.Item
-                      href="/earthquakes/create"
-                      data-testid="appnavbar-earthquakes-create"
+                      href="/earthquakes/retrieve"
+                      data-testid="appnavbar-earthquakes-retrieve"
                     >
-                      Create
+                      Retrieve
                     </NavDropdown.Item>
                   )}
                 </NavDropdown>
