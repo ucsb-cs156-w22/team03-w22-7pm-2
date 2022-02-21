@@ -1,4 +1,4 @@
-const earthquakeFixtures = {
+const earthquakesFixtures = {
   twoEarthquakes: [
     {
       id: 'abcd1234abcd1234abcd1234',
@@ -17,4 +17,4 @@ const earthquakeFixtures = {
   ],
 };
 
-export { earthquakeFixtures };
+export { earthquakesFixtures };

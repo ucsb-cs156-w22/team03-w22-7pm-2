@@ -9,7 +9,7 @@ export default function EarthquakesTable({ students, currentUser }) {
       accessor: 'id', // accessor is the "key" in the data
     },
     {
-      Header: <Link to="/">Go to Aboutpage</Link>,
+      Header: 'Title',
       accessor: 'title',
     },
     {
@@ -19,6 +19,10 @@ export default function EarthquakesTable({ students, currentUser }) {
     {
       Header: 'Place',
       accessor: 'place',
+    },
+    {
+      Header: 'Time',
+      accessor: 'time',
     },
   ];
 
