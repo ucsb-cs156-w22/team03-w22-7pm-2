@@ -14,7 +14,7 @@ describe('EarthquakesTable tests', () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <EarthquakesTable Earthquakes={[]} currentUser={currentUser} />
+          <EarthquakesTable earthquakes={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
     );
@@ -26,7 +26,7 @@ describe('EarthquakesTable tests', () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <EarthquakesTable Earthquakes={[]} currentUser={currentUser} />
+          <EarthquakesTable earthquakes={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
     );
@@ -38,7 +38,7 @@ describe('EarthquakesTable tests', () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <EarthquakesTable Earthquakes={[]} currentUser={currentUser} />
+          <EarthquakesTable earthquakes={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
     );
@@ -51,7 +51,7 @@ describe('EarthquakesTable tests', () => {
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <EarthquakesTable
-            Earthquakes={earthquakesFixtures.twoEarthquakes}
+            earthquakes={earthquakesFixtures.twoEarthquakes}
             currentUser={currentUser}
           />
         </MemoryRouter>
@@ -78,10 +78,10 @@ describe('EarthquakesTable tests', () => {
     expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
       'abcd5678abcd5678abcd5678'
     );
-    expect(getByTestId(`${testId}-cell-row-0-col-Title`)).toHaveTextContent(
+    expect(getByTestId(`${testId}-cell-row-0-col-title`)).toHaveTextContent(
       'M 2.2 - 10km ESE of Ojai, CA'
     );
-    expect(getByTestId(`${testId}-cell-row-1-col-Title`)).toHaveTextContent(
+    expect(getByTestId(`${testId}-cell-row-1-col-title`)).toHaveTextContent(
       'M 6.9 - 21km S of Cupertino, CA'
     );
   });
