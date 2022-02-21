@@ -54,8 +54,7 @@ export default function UCSBSubjetsTable({ subjects, currentUser }) {
         },
         {
             Header: 'Inactive',
-            accessor: 'inactive',
-        },
+            accessor: row => String(row.inactive), id: "inactive"        },
     ];
 
     if (hasRole(currentUser, "ROLE_ADMIN")) {
