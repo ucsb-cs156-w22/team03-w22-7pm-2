@@ -20,7 +20,7 @@ public class Metadata {
     @Id
     private String _id;
 
-    private int generated;
+    private long generated;
     private String url;
     private String title;
     private int status;
