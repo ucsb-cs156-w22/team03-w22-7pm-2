@@ -12,6 +12,7 @@ export default function EarthquakesTable({ earthquakes, currentUser }) {
     {
       Header: 'Title',
       accessor: (row) => <a href={row.url}>{row.title}</a>,
+      id: 'title',
     },
     {
       Header: 'Magnitude',
