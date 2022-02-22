@@ -1,7 +1,7 @@
 import React from 'react';
 
 import EarthquakesForm from 'main/components/Earthquakes/EarthquakesForm';
-import { EarthquakesFixtures } from 'fixtures/EarthquakesFixtures';
+import { earthquakesFixtures } from 'fixtures/earthquakesFixtures';
 
 export default {
   title: 'components/Earthquakes/EarthquakesForm',
@@ -24,7 +24,7 @@ Default.args = {
 export const Show = Template.bind({});
 
 Show.args = {
-  Earthquakes: EarthquakesFixtures.oneDate,
+  Earthquakes: earthquakesFixtures.twoEarthquakes,
   submitText: '',
   submitAction: () => {},
 };

@@ -25,7 +25,7 @@ function EarthquakesForm({
   //   const isodate_regex =
   //     /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
 
-  //   // Stryker disable next-line all
+  //   Stryker disable next-line all
   //   const yyyyq_regex = /((19)|(20))\d{2}[1-4]/i; // Accepts from 1900-2099 followed by 1-4.  Close enough.
 
   return (
@@ -41,7 +41,6 @@ function EarthquakesForm({
           isInvalid={Boolean(errors.title)}
           {...register('distanceFromStorke', {
             required: true,
-            pattern: yyyyq_regex,
           })}
         />
         <Form.Control.Feedback type="invalid">
