@@ -5,25 +5,23 @@ export default function EarthquakesTable({ earthquakes, currentUser }) {
   // Stryker enable all
   const columns = [
     {
-      Header: 'id',
-      accessor: 'id', // accessor is the "key" in the data
-    },
-    {
       Header: 'Title',
-      accessor: (row) => <a href={row.url}>{row.title}</a>,
-      id: 'title',
+      accessor: (row) => (
+        <a href={row.properties.url}>{row.properties.title}</a>
+      ),
+      id: 'properties.title',
     },
     {
       Header: 'Magnitude',
-      accessor: 'mag',
+      accessor: 'properties.mag',
     },
     {
       Header: 'Place',
-      accessor: 'place',
+      accessor: 'properties.place',
     },
     {
       Header: 'Time',
-      accessor: 'time',
+      accessor: 'properties.time',
     },
   ];
 
