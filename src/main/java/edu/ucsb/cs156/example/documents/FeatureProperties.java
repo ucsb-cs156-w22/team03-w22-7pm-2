@@ -21,12 +21,14 @@ public class FeatureProperties {
 
     private float mag;
     private String place;
-    private int time;
-    private int updated;
+    private long time;
+    private long updated;
+    private int tz;
     private String url;
     private String detail;
     private int felt;
-    private int cdi;
+    private float cdi;
+    private float mmi;
     private String status;
     private int tsunami;
     private int sig;
@@ -38,7 +40,7 @@ public class FeatureProperties {
     private int nst;
     private float dmin;
     private float rms;
-    private int gap;
+    private float gap;
     private String magType;
     private String type;
     private String title;
