@@ -90,6 +90,14 @@ public class EarthquakesControllerTests extends ControllerTestCase{
             .andExpect(status().is(403));
     }
 
+    @WithMockUser(roles = { "USER" })
+    @Test
+    public void api_purge_user() throws Exception
+    {
+        mockMvc.perform(get("/api/earthquakes/purge")).with(csrf())
+            .andExpect(status().is(403));
+    }
+
     @WithMockUser(roles = { "ADMIN" })
     @Test
     public void api_purge_admin() throws Exception
@@ -110,5 +118,34 @@ public class EarthquakesControllerTests extends ControllerTestCase{
     {
         mockMvc.perform(post("/api/earthquakes/retrieve?magnitude=1&distance=100").with(csrf()))
             .andExpect(status().is(403));
+    }
+
+    @WithMockUser(roles = { "USER" })
+    @Test
+    public void api_retrieve_user() throws Exception
+    {
+        mockMvc.perform(get("/api/earthquakes/retrieve?magnitude=1&distance=100")).with(csrf())
+            .andExpect(status().is(403));
+    }
+
+    @WithMockUser(roles = { "ADMIN" })
+    @Test
+    public void api_retrieve_admin() throws Exception
+    {
+        Feature feature1 = new Feature();
+        feature1.setType("Type Test 1");
+        List<Feature> expectedFeatures = new ArrayList<Feature>();
+
+        when(earthquakesCollection.saveAll(expectedFeatures)).thenReturn(expectedFeatures);
+
+        MvcResult response = mockMvc.perform(post("/api/earthquakes/retrieve?magnitude=1&distance=100").with(csrf()))
+            .andExpect(status().isOk()).andReturn();
+
+        verify(earthquakesCollection, times(1)).saveAll(expectedFeatures);
+
+        String expected = mapper.writeValueAsString(expectedFeatures);
+        String actual = response.getResponse().getContentAsString();
+
+        assertEquals(expected, actual);
     }
 }

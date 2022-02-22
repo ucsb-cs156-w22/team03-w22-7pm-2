@@ -66,7 +66,10 @@ public class EarthquakesController extends ApiController{
         log.info("getEarthquakes: distance={} minMag={}", distance, minMag);
         String json = earthquakeQueryService.getJSON(distance, minMag);
         
-        
+        FeatureCollection fCol = mapper.readValue(json, FeatureCollection.class);
+        earthquakesCollection.saveAll(fCol.getFeatures());
+
+        return earthquakesCollection.getFeatures();
     }
 
 }
