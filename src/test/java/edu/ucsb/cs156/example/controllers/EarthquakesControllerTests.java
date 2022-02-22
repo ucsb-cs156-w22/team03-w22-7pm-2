@@ -111,7 +111,7 @@ public class EarthquakesControllerTests extends ControllerTestCase{
         verify(earthquakesCollection, times(1)).deleteAll();
     }
 
-    // TESTS FOR /retrieve
+    // TESTS FOR /retrieve 
 
     @Test
     public void api_retrieve_not_logged_in() throws Exception
