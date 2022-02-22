@@ -3,6 +3,7 @@ import OurTable from 'main/components/OurTable';
 import { Link } from 'react-router-dom';
 
 export default function EarthquakesTable({ earthquakes, currentUser }) {
+  // Stryker enable all
   const columns = [
     {
       Header: 'id',
@@ -10,7 +11,8 @@ export default function EarthquakesTable({ earthquakes, currentUser }) {
     },
     {
       Header: 'Title',
-      accessor: 'title',
+      accessor: (row) => <Link to="url"> 'title' </Link>,
+      id: 'title',
     },
     {
       Header: 'Magnitude',
