@@ -63,7 +63,7 @@ describe('EarthquakesRetrievePage tests', () => {
       minMag: 6.9,
     };
 
-    axiosMock.onPost('/api/Earthquakes/post').reply(202, earthquakes);
+    axiosMock.onPost('/api/earthquakes/retrieve').reply(202, earthquake);
 
     const { getByTestId } = render(
       <QueryClientProvider client={queryClient}>
@@ -83,6 +83,7 @@ describe('EarthquakesRetrievePage tests', () => {
       'EarthquakesForm-distanceFromStorke'
     );
     const minMagField = getByTestId('EarthquakesForm-minMag');
+    const submitButton = getByTestId('EarthquakesForm-submit');
 
     fireEvent.change(distanceFromStorkeField, { target: { value: '5' } });
     fireEvent.change(minMagField, {
@@ -100,9 +101,7 @@ describe('EarthquakesRetrievePage tests', () => {
       distanceFromStorke: '5',
     });
 
-    expect(mockToast).toBeCalledWith(
-      'New Earthquake Retrieved - Distance from Storke: 5 km Minimum Magnitude 6.9'
-    );
+    expect(mockToast).toBeCalledWith('1 Earthquakes retrieved');
     expect(mockNavigate).toBeCalledWith({ to: '/earthquakes/list' });
   });
 });

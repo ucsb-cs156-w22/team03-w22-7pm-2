@@ -15,9 +15,7 @@ export default function EarthquakesCreatePage() {
   });
 
   const onSuccess = (earthquakes) => {
-    toast(
-      `New Earthquakes Created - Distance from Storke: ${earthquakes.distanceFromStorke} km Minimum Magnitude: ${earthquakes.minMag}`
-    );
+    toast(`${earthquakes.length} Earthquakes retrieved`);
   };
 
   const mutation = useBackendMutation(
