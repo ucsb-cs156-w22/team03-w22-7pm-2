@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 function EarthquakesForm({
   initialEarthquakes,
   submitAction,
-  buttonLabel = 'Create',
+  buttonLabel = 'Retrieve',
 }) {
   // Stryker disable all
   const {
@@ -30,69 +30,38 @@ function EarthquakesForm({
 
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
-      {initialEarthquakes && (
-        <Form.Group className="mb-3">
-          <Form.Label htmlFor="id">Id</Form.Label>
-          <Form.Control
-            data-testid="EarthquakesForm-id"
-            id="id"
-            type="text"
-            {...register('id')}
-            value={initialEarthquakes.id}
-            disabled
-          />
-        </Form.Group>
-      )}
-
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="title">Title</Form.Label>
+        <Form.Label htmlFor="distanceFromStorke">
+          Distance in km from Storke Tower{' '}
+        </Form.Label>
         <Form.Control
-          data-testid="EarthquakesForm-title"
-          id="title"
+          data-testid="EarthquakesForm-distanceFromStorke"
+          id="distanceFromStorke"
           type="text"
           isInvalid={Boolean(errors.title)}
-          {...register('title', {
+          {...register('distanceFromStorke', {
             required: true,
             pattern: yyyyq_regex,
           })}
         />
         <Form.Control.Feedback type="invalid">
-          {errors.title && 'Title is required. '}
+          {errors.title && 'Distance is required. '}
         </Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="mag">Magnitude</Form.Label>
+        <Form.Label htmlFor="minMag">Minimum Magnitude</Form.Label>
         <Form.Control
-          data-testid="EarthquakesForm-mag"
-          id="mag"
+          data-testid="EarthquakesForm-minMag"
+          id="minMag"
           type="text"
           isInvalid={Boolean(errors.name)}
-          {...register('mag', {
+          {...register('minMag', {
             required: 'Magnitude is required.',
           })}
         />
         <Form.Control.Feedback type="invalid">
           {errors.name?.message}
-        </Form.Control.Feedback>
-      </Form.Group>
-
-      <Form.Group className="mb-3">
-        <Form.Label htmlFor="places">Date (iso format)</Form.Label>
-        <Form.Control
-          data-testid="EarthquakesForm-places"
-          id="places"
-          type="text"
-          isInvalid={Boolean(errors.places)}
-          {...register('places', {
-            required: true,
-            pattern: isodate_regex,
-          })}
-        />
-        <Form.Control.Feedback type="invalid">
-          {errors.places && 'places is required. '}
-          {errors.places?.type === 'pattern' &&
-            'places must be in ISO format, e.g. 2022-01-02T15:30'}
         </Form.Control.Feedback>
       </Form.Group>
 
