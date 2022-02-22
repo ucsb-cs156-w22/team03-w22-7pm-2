@@ -14,12 +14,11 @@ import UCSBDatesEditPage from 'main/pages/UCSBDates/UCSBDatesEditPage';
 import StudentsIndexPage from 'main/pages/Students/StudentsIndexPage';
 import StudentsCreatePage from 'main/pages/Students/StudentsCreatePage';
 
-import UCSBSubjectsIndexPage from "main/pages/UCSBSubjects/UCSBSubjectsIndexPage";
-import UCSBSubjectsCreatePage from "main/pages/UCSBSubjects/UCSBSubjectsCreatePage";
+import UCSBSubjectsIndexPage from 'main/pages/UCSBSubjects/UCSBSubjectsIndexPage';
+import UCSBSubjectsCreatePage from 'main/pages/UCSBSubjects/UCSBSubjectsCreatePage';
 
 import EarthquakesIndexPage from 'main/pages/Earthquakes/EarthquakesIndexPage';
 import EarthquakesRetrievePage from 'main/pages/Earthquakes/EarthquakesRetrievePage';
-import EarthquakesEditPage from 'main/pages/Earthquakes/EarthquakesEditPage';
 
 import { hasRole, useCurrentUser } from 'main/utils/currentUser';
 
@@ -103,30 +102,29 @@ function App() {
           <>
             <Route
               exact
-              path="/earthquakes/edit/:id"
-              element={<EarthquakesEditPage />}
-            />
-            <Route
-              exact
               path="/earthquakes/retrieve"
               element={<EarthquakesRetrievePage />}
             />
           </>
         )}
-        {
-          hasRole(currentUser, "ROLE_USER") && (
-            <>
-              <Route exact path="/UCSBSubjects/list" element={<UCSBSubjectsIndexPage />} />
-            </>
-          )
-        }
-        {
-          hasRole(currentUser, "ROLE_ADMIN") && (
-            <>
-              <Route exact path="/UCSBSubjects/create" element={<UCSBSubjectsCreatePage />} />
-            </>
-          )
-        }
+        {hasRole(currentUser, 'ROLE_USER') && (
+          <>
+            <Route
+              exact
+              path="/UCSBSubjects/list"
+              element={<UCSBSubjectsIndexPage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, 'ROLE_ADMIN') && (
+          <>
+            <Route
+              exact
+              path="/UCSBSubjects/create"
+              element={<UCSBSubjectsCreatePage />}
+            />
+          </>
+        )}
       </Routes>
     </BrowserRouter>
   );

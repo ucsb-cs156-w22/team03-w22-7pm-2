@@ -4,7 +4,7 @@ import { Navigate } from 'react-router-dom';
 import { useBackendMutation } from 'main/utils/useBackend';
 import { toast } from 'react-toastify';
 
-export default function EarthquakesCreatePage() {
+export default function EarthquakesRetrievePage() {
   const objectToAxiosParams = (earthquakes) => ({
     url: '/api/earthquakes/retrieve',
     method: 'POST',
@@ -15,7 +15,7 @@ export default function EarthquakesCreatePage() {
   });
 
   const onSuccess = (earthquakes) => {
-    toast(`${count} Earthquakes retrieved`);
+    toast(`1 Earthquakes retrieved`);
   };
 
   const mutation = useBackendMutation(
@@ -38,7 +38,7 @@ export default function EarthquakesCreatePage() {
   return (
     <BasicLayout>
       <div className="pt-2">
-        <h1>Create New Earthquakes</h1>
+        <h1>Retrieve New Earthquakes</h1>
 
         <EarthquakesForm submitAction={onSubmit} />
       </div>
