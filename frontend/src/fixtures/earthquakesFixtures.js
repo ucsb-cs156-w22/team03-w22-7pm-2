@@ -6,6 +6,7 @@ const earthquakesFixtures = {
       mag: '2.16',
       place: '10km ESE of Ojai, CA',
       time: '1644571919000',
+      url: `https://earthquake.usgs.gov/`,
     },
     {
       id: 'abcd5678abcd5678abcd5678',
@@ -13,6 +14,7 @@ const earthquakesFixtures = {
       mag: '6.9',
       place: '21km S of Cupertino, CA',
       time: '1844531919000',
+      url: 'https://earthquake.usgs.gov/',
     },
   ],
 };

@@ -31,20 +31,20 @@ function EarthquakesForm({
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="distanceFromStorke">
+        <Form.Label htmlFor="distance">
           Distance in km from Storke Tower{' '}
         </Form.Label>
         <Form.Control
-          data-testid="EarthquakesForm-distanceFromStorke"
-          id="distanceFromStorke"
+          data-testid="EarthquakesForm-distance"
+          id="distance"
           type="text"
-          isInvalid={Boolean(errors.distanceFromStorke)}
-          {...register('distanceFromStorke', {
+          isInvalid={Boolean(errors.distance)}
+          {...register('distance', {
             required: 'Distance is required.',
           })}
         />
         <Form.Control.Feedback type="invalid">
-          {errors.distanceFromStorke?.message}
+          {errors.distance?.message}
         </Form.Control.Feedback>
       </Form.Group>
 

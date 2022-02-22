@@ -9,7 +9,7 @@ export default function EarthquakesRetrievePage() {
     url: '/api/earthquakes/retrieve',
     method: 'POST',
     params: {
-      distanceFromStorke: earthquakes.distanceFromStorke,
+      distance: earthquakes.distance,
       minMag: earthquakes.minMag,
     },
   });

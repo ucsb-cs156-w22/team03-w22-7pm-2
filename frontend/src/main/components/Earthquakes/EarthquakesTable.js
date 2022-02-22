@@ -1,6 +1,5 @@
 import React from 'react';
 import OurTable from 'main/components/OurTable';
-import { Link } from 'react-router-dom';
 
 export default function EarthquakesTable({ earthquakes, currentUser }) {
   // Stryker enable all
