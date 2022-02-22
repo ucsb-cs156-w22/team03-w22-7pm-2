@@ -9,12 +9,13 @@ import edu.ucsb.cs156.example.entities.Todo;
 import edu.ucsb.cs156.example.collections.EarthquakesCollection;
 import edu.ucsb.cs156.example.controllers.EarthquakesController;
 import edu.ucsb.cs156.example.documents.Feature;
-import edu.ucsb.cs156.example.documents.Features;
+import edu.ucsb.cs156.example.documents.FeatureCollection;
 import edu.ucsb.cs156.example.services.EarthquakeQueryService;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import static org.mockito.Mockito.doNothing;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -24,6 +25,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -86,7 +88,7 @@ public class EarthquakesControllerTests extends ControllerTestCase{
     @Test
     public void api_purge_not_logged_in() throws Exception
     {
-        mockMvc.perform(get("/api/earthquakes/purge"))
+        mockMvc.perform(post("/api/earthquakes/purge"))
             .andExpect(status().is(403));
     }
 
@@ -94,7 +96,7 @@ public class EarthquakesControllerTests extends ControllerTestCase{
     @Test
     public void api_purge_user() throws Exception
     {
-        mockMvc.perform(get("/api/earthquakes/purge")).with(csrf())
+        mockMvc.perform(post("/api/earthquakes/purge").with(csrf()))
             .andExpect(status().is(403));
     }
 
@@ -116,7 +118,7 @@ public class EarthquakesControllerTests extends ControllerTestCase{
     @Test
     public void api_retrieve_not_logged_in() throws Exception
     {
-        mockMvc.perform(post("/api/earthquakes/retrieve?magnitude=1&distance=100").with(csrf()))
+        mockMvc.perform(post("/api/earthquakes/retrieve?distance=100&minMag=1").with(csrf()))
             .andExpect(status().is(403));
     }
 
@@ -124,7 +126,7 @@ public class EarthquakesControllerTests extends ControllerTestCase{
     @Test
     public void api_retrieve_user() throws Exception
     {
-        mockMvc.perform(get("/api/earthquakes/retrieve?magnitude=1&distance=100")).with(csrf())
+        mockMvc.perform(post("/api/earthquakes/retrieve?distance=100&minMag=1").with(csrf()))
             .andExpect(status().is(403));
     }
 
@@ -132,18 +134,20 @@ public class EarthquakesControllerTests extends ControllerTestCase{
     @Test
     public void api_retrieve_admin() throws Exception
     {
-        Feature feature1 = new Feature();
-        feature1.setType("Type Test 1");
+        FeatureCollection fCol = new FeatureCollection();
+        fCol.setType("Type Test 1");
         List<Feature> expectedFeatures = new ArrayList<Feature>();
+        fCol.setFeatures(expectedFeatures);
 
+        
         when(earthquakesCollection.saveAll(expectedFeatures)).thenReturn(expectedFeatures);
 
-        MvcResult response = mockMvc.perform(post("/api/earthquakes/retrieve?magnitude=1&distance=100").with(csrf()))
+        MvcResult response = mockMvc.perform(post("/api/earthquakes/retrieve?distance=100&minMag=1").with(csrf()))
             .andExpect(status().isOk()).andReturn();
 
         verify(earthquakesCollection, times(1)).saveAll(expectedFeatures);
 
-        String expected = mapper.writeValueAsString(expectedFeatures);
+        String expected = "[]"; //mapper.writeValueAsString(expectedFeatures);
         String actual = response.getResponse().getContentAsString();
 
         assertEquals(expected, actual);

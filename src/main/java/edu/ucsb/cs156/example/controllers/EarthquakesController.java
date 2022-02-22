@@ -59,8 +59,8 @@ public class EarthquakesController extends ApiController{
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiOperation(value = "Store query from USGS Eartquake API", notes = "Only accessible to Admins")
-    @GetMapping("/retrieve")
-    public ResponseEntity<FeatureCollection> getEarthquake(
+    @PostMapping("/retrieve")
+    public Iterable<Feature> getEarthquake(
         @ApiParam("distance in km, e.g. 100") @RequestParam String distance,
         @ApiParam("minimum magnitude, e.g. 2.5") @RequestParam String minMag
     ) throws JsonProcessingException {
@@ -70,7 +70,7 @@ public class EarthquakesController extends ApiController{
         FeatureCollection fCol = mapper.readValue(json, FeatureCollection.class);
         earthquakesCollection.saveAll(fCol.getFeatures());
 
-        return earthquakesCollection.getFeatures();
+        return fCol.getFeatures();
     }
 
 }
