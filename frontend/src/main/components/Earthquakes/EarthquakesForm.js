@@ -38,13 +38,13 @@ function EarthquakesForm({
           data-testid="EarthquakesForm-distanceFromStorke"
           id="distanceFromStorke"
           type="text"
-          isInvalid={Boolean(errors.title)}
+          isInvalid={Boolean(errors.distanceFromStorke)}
           {...register('distanceFromStorke', {
-            required: true,
+            required: 'Distance is required.',
           })}
         />
         <Form.Control.Feedback type="invalid">
-          {errors.title && 'Distance is required. '}
+          {errors.distanceFromStorke?.message}
         </Form.Control.Feedback>
       </Form.Group>
 
@@ -54,13 +54,13 @@ function EarthquakesForm({
           data-testid="EarthquakesForm-minMag"
           id="minMag"
           type="text"
-          isInvalid={Boolean(errors.name)}
+          isInvalid={Boolean(errors.minMag)}
           {...register('minMag', {
             required: 'Magnitude is required.',
           })}
         />
         <Form.Control.Feedback type="invalid">
-          {errors.name?.message}
+          {errors.minMag?.message}
         </Form.Control.Feedback>
       </Form.Group>
 

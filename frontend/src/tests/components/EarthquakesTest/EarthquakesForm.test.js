@@ -18,46 +18,25 @@ describe('EarthquakesForm tests', () => {
       </Router>
     );
     // await waitFor(() => expect(getByText(/Quarter YYYYQ/)).toBeInTheDocument());
-    await waitFor(() => expect(getByText(/Create/)).toBeInTheDocument());
+    await waitFor(() => expect(getByText(/Retrieve/)).toBeInTheDocument());
   });
 
-  test('renders correctly when passing in a Earthquakes ', async () => {
-    const { getByText, getByTestId } = render(
-      <Router>
-        <EarthquakesForm initialEarthquakes={EarthquakesFixtures.oneSubject} />
-      </Router>
-    );
-    await waitFor(() =>
-      expect(
-        getByTestId(/EarthquakesForm-distanceFromStorke/)
-      ).toBeInTheDocument()
-    );
-    expect(getByText(/distanceFromStorke/)).toBeInTheDocument();
-    expect(getByTestId(/EarthquakesForm-distanceFromStorke/)).toHaveValue('1');
-  });
-  /**
-  test('Correct Error messsages on bad input', async () => {
-    const { getByTestId, getByText } = render(
-      <Router>
-        <EarthquakesForm />
-      </Router>
-    );
-    await waitFor(() =>
-      expect(getByTestId('EarthquakesForm-subjectCode')).toBeInTheDocument()
-    );
-    const subjectCodeField = getByTestId('EarthquakesForm-subjectCode');
-    const submitButton = getByTestId('EarthquakesForm-submit');
-    fireEvent.change(subjectCodeField, { target: { value: 'bad-input' } });
-    fireEvent.click(submitButton);
-    await waitFor(() =>
-      expect(getByText(/subjectCode is required/)).toBeInTheDocument()
-    );
-    expect(getByText(/subjectTranslation is required/)).toBeInTheDocument();
-    expect(getByText(/deptCode is required/)).toBeInTheDocument();
-    expect(getByText(/collegeCode is required/)).toBeInTheDocument();
-    expect(getByText(/relatedDeptCode is required/)).toBeInTheDocument();
-  });
-  */
+  // test('renders correctly when passing in an Earthquake', async () => {
+  //   const { getByText, getByTestId } = render(
+  //     <Router>
+  //       <EarthquakesForm
+  //         initialEarthquakes={earthquakesFixtures.twoEarthquakes}
+  //       />
+  //     </Router>
+  //   );
+  //   await waitFor(() =>
+  //     expect(
+  //       getByTestId(/EarthquakesForm-distanceFromStorke/)
+  //     ).toBeInTheDocument()
+  //   );
+  //   expect(getByText(/distanceFromStorke/)).toBeInTheDocument();
+  //   expect(getByTestId(/EarthquakesForm-distanceFromStorke/)).toHaveValue('5');
+  // });
 
   test('Correct Error messsages on missing input', async () => {
     const { getByTestId, getByText } = render(
@@ -92,12 +71,16 @@ describe('EarthquakesForm tests', () => {
       ).toBeInTheDocument()
     );
 
+    const distanceFromStorkeField = getByTestId(
+      'EarthquakesForm-distanceFromStorke'
+    );
+
     const minMagField = getByTestId('EarthquakesForm-minMag');
 
     const submitButton = getByTestId('EarthquakesForm-submit');
 
-    fireEvent.change(distanceFromStorke, { target: { value: '5' } });
-    fireEvent.change(minMag, {
+    fireEvent.change(distanceFromStorkeField, { target: { value: '5' } });
+    fireEvent.change(minMagField, {
       target: { value: '6.9' },
     });
     fireEvent.click(submitButton);
