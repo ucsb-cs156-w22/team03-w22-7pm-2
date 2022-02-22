@@ -15,11 +15,11 @@ const Template = (args) => {
 export const Empty = Template.bind({});
 
 Empty.args = {
-  Earthquakes: [],
+  earthquakes: [],
 };
 
 export const TwoEarthquakes = Template.bind({});
 
 TwoEarthquakes.args = {
-  Earthquakes: earthquakesFixtures.twoEarthquakes,
+  earthquakes: earthquakesFixtures.twoEarthquakes,
 };
