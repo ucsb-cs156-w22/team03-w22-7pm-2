@@ -134,22 +134,37 @@ public class EarthquakesControllerTests extends ControllerTestCase{
     @Test
     public void api_retrieve_admin() throws Exception
     {
+        String distance = "100";
+        String minMag = "1";
+
         FeatureCollection fCol = new FeatureCollection();
         fCol.setType("Type Test 1");
+
+        Feature f = new Feature();
+
         List<Feature> expectedFeatures = new ArrayList<Feature>();
+        expectedFeatures.add(f);
         fCol.setFeatures(expectedFeatures);
 
-        
-        when(earthquakesCollection.saveAll(expectedFeatures)).thenReturn(expectedFeatures);
+        String fColJSON = mapper.writeValueAsString(fCol);
+        when(earthquakeQueryService.getJSON(eq(distance), eq(minMag))).thenReturn(fColJSON);
 
+        String fJSON = mapper.writeValueAsString(f);
+        Feature savedFeature = mapper.readValue(fJSON, Feature.class);
+
+        List<Feature> savedFeatures = new ArrayList<Feature>();
+        savedFeatures.add(savedFeature);
+        when(earthquakesCollection.saveAll(savedFeatures)).thenReturn(savedFeatures);
+        
         MvcResult response = mockMvc.perform(post("/api/earthquakes/retrieve?distance=100&minMag=1").with(csrf()))
             .andExpect(status().isOk()).andReturn();
 
-        verify(earthquakesCollection, times(1)).saveAll(expectedFeatures);
+        verify(earthquakeQueryService, times(1)).getJSON(eq(distance), eq(minMag));
+        verify(earthquakesCollection, times(1)).saveAll(savedFeatures);
 
-        String expected = "[]"; //mapper.writeValueAsString(expectedFeatures);
+        String savedJSON = mapper.writeValueAsString(savedFeatures);
         String actual = response.getResponse().getContentAsString();
 
-        assertEquals(expected, actual);
+        assertEquals(savedJSON, actual);
     }
 }
