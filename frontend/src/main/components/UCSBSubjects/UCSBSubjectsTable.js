@@ -1,74 +1,85 @@
-import React from "react";
-import OurTable, { ButtonColumn } from "main/components/OurTable";
+import React from 'react';
+import OurTable, { ButtonColumn } from 'main/components/OurTable';
 // import { toast } from "react-toastify";
-import { useBackendMutation } from "main/utils/useBackend";
-import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/UCSBSubjectUtils"
-import { useNavigate } from "react-router-dom";
-import { hasRole } from "main/utils/currentUser";
+import { useBackendMutation } from 'main/utils/useBackend';
+import {
+  cellToAxiosParamsDelete,
+  onDeleteSuccess,
+} from 'main/utils/UCSBSubjectUtils';
+import { useNavigate } from 'react-router-dom';
+import { hasRole } from 'main/utils/currentUser';
 
-export default function UCSBSubjetsTable({ subjects, currentUser }) {
+export default function UCSBSubjectsTable({ subjects, currentUser }) {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  const editCallback = (cell) => {
+    navigate(`/UCSBSubjects/edit/${cell.row.values.id}`);
+  };
 
-    const editCallback = (cell) => {
-        navigate(`/UCSBSubjects/edit/${cell.row.values.id}`)
-    }
+  // Stryker disable all : hard to test for query caching
 
-    // Stryker disable all : hard to test for query caching
+  const deleteMutation = useBackendMutation(
+    cellToAxiosParamsDelete,
+    { onSuccess: onDeleteSuccess },
+    ['/api/UCSBSubjects/all']
+  );
+  // Stryker enable all
 
-    const deleteMutation = useBackendMutation(
-        cellToAxiosParamsDelete,
-        { onSuccess: onDeleteSuccess },
-        ["/api/UCSBSubjects/all"]
+  // Stryker disable next-line all : TODO try to make a good test for this
+  const deleteCallback = async (cell) => {
+    deleteMutation.mutate(cell);
+  };
+
+  const columns = [
+    {
+      Header: 'id',
+      accessor: 'id', // accessor is the "key" in the data
+    },
+    {
+      Header: 'SubjectCode',
+      accessor: 'subjectCode',
+    },
+    {
+      Header: 'SubjectTranslation',
+      accessor: 'subjectTranslation',
+    },
+    {
+      Header: 'DeptCode',
+      accessor: 'deptCode',
+    },
+    {
+      Header: 'CollegeCode',
+      accessor: 'collegeCode',
+    },
+    {
+      Header: 'RelatedDeptCode',
+      accessor: 'relatedDeptCode',
+    },
+    {
+      Header: 'Inactive',
+      accessor: (row) => String(row.inactive),
+      id: 'inactive',
+    },
+  ];
+
+  if (hasRole(currentUser, 'ROLE_ADMIN')) {
+    columns.push(
+      ButtonColumn('Edit', 'primary', editCallback, 'UCSBSubjectsTable')
     );
-    // Stryker enable all 
+    columns.push(
+      ButtonColumn('Delete', 'danger', deleteCallback, 'UCSBSubjectsTable')
+    );
+  }
 
-    // Stryker disable next-line all : TODO try to make a good test for this
-    const deleteCallback = async (cell) => { deleteMutation.mutate(cell); }
+  // Stryker disable next-line ArrayDeclaration : [columns] is a performance optimization
+  const memoizedColumns = React.useMemo(() => columns, [columns]);
+  const memoizedSubjects = React.useMemo(() => subjects, [subjects]);
 
-
-    const columns = [
-        {
-            Header: 'id',
-            accessor: 'id', // accessor is the "key" in the data
-        },
-        {
-            Header: 'SubjectCode',
-            accessor: 'subjectCode',
-        },
-        {
-            Header: 'SubjectTranslation',
-            accessor: 'subjectTranslation',
-        },
-        {
-            Header: 'DeptCode',
-            accessor: 'deptCode',
-        },
-        {
-            Header: 'CollegeCode',
-            accessor: 'collegeCode',
-        },
-        {
-            Header: 'RelatedDeptCode',
-            accessor: 'relatedDeptCode',
-        },
-        {
-            Header: 'Inactive',
-            accessor: row => String(row.inactive), id: "inactive"        },
-    ];
-
-    if (hasRole(currentUser, "ROLE_ADMIN")) {
-        columns.push(ButtonColumn("Edit", "primary", editCallback, "UCSBSubjectsTable"));
-        columns.push(ButtonColumn("Delete", "danger", deleteCallback, "UCSBSubjectsTable"));
-    } 
-
-    // Stryker disable next-line ArrayDeclaration : [columns] is a performance optimization
-    const memoizedColumns = React.useMemo(() => columns, [columns]);
-    const memoizedSubjects = React.useMemo(() => subjects, [subjects]);
-
-    return <OurTable
-        data={memoizedSubjects}
-        columns={memoizedColumns}
-        testid={"UCSBSubjectsTable"}
-    />;
-};
+  return (
+    <OurTable
+      data={memoizedSubjects}
+      columns={memoizedColumns}
+      testid={'UCSBSubjectsTable'}
+    />
+  );
+}
