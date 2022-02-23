@@ -5,20 +5,6 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { MemoryRouter } from 'react-router-dom';
 import { currentUserFixtures } from 'fixtures/currentUserFixtures';
 
-const mockedNavigate = jest.fn();
-
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useNavigate: () => mockedNavigate,
-}));
-
-const mockedMutate = jest.fn();
-
-jest.mock('main/utils/useBackend', () => ({
-  ...jest.requireActual('main/utils/useBackend'),
-  useBackendMutation: () => ({ mutate: mockedMutate }),
-}));
-
 describe('EarthquakesTable tests', () => {
   const queryClient = new QueryClient();
 
@@ -91,6 +77,30 @@ describe('EarthquakesTable tests', () => {
     );
     expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
       'abcd5678abcd5678abcd5678'
+    );
+    expect(getByTestId(`${testId}-cell-row-0-col-title`)).toHaveTextContent(
+      'M 2.2 - 10km ESE of Ojai, CA'
+    );
+    expect(getByTestId(`${testId}-cell-row-1-col-title`)).toHaveTextContent(
+      'M 6.9 - 21km S of Cupertino, CA'
+    );
+    expect(getByTestId(`${testId}-cell-row-0-col-mag`)).toHaveTextContent(
+      '2.16'
+    );
+    expect(getByTestId(`${testId}-cell-row-1-col-mag`)).toHaveTextContent(
+      '6.9'
+    );
+    expect(getByTestId(`${testId}-cell-row-0-col-place`)).toHaveTextContent(
+      '10km ESE of Ojai, CA'
+    );
+    expect(getByTestId(`${testId}-cell-row-1-col-place`)).toHaveTextContent(
+      '21km S of Cupertino, CA'
+    );
+    expect(getByTestId(`${testId}-cell-row-0-col-time`)).toHaveTextContent(
+      '1644571919000'
+    );
+    expect(getByTestId(`${testId}-cell-row-1-col-time`)).toHaveTextContent(
+      '1844531919000'
     );
   });
 });

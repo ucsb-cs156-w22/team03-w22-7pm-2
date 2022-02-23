@@ -9,7 +9,6 @@ const earthquakesFixtures = {
         time: '1644571919000',
         url: 'https://earthquake.usgs.gov/',
       },
-      length: '2',
     },
     {
       id: 'abcd5678abcd5678abcd5678',
@@ -20,7 +19,6 @@ const earthquakesFixtures = {
         time: '1844531919000',
         url: 'https://earthquake.usgs.gov/',
       },
-      length: '2',
     },
   ],
 };
