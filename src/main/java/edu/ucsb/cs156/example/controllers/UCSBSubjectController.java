@@ -88,11 +88,9 @@ public class UCSBSubjectController extends ApiController{
 
     @ApiOperation(value = "Get a UCSB Subject with given id")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-
     @GetMapping("")
     public ResponseEntity<String> getUCSBSubjectById(
         @ApiParam("id") @RequestParam String id) throws JsonProcessingException {
-        //loggingService.logMethod();
 
         UCSBSubjectOrError ucsbsub_error = new UCSBSubjectOrError(id);
 
@@ -134,7 +132,7 @@ public class UCSBSubjectController extends ApiController{
             if (optionalUCSBSubject.isEmpty()) {
                 ucsbsub_error.error = ResponseEntity
                         .badRequest()
-                        .body(String.format("ucsb subject with id %d not found", ucsbsub_error.id));
+                        .body(String.format("ucsb subject with id %s not found", ucsbsub_error.id));
             } else {
                 ucsbsub_error.sub = optionalUCSBSubject.get();
             }
@@ -155,7 +153,7 @@ public class UCSBSubjectController extends ApiController{
         }
 
         ucsbsubjectCollection.deleteById(id);
-        return ResponseEntity.ok().body(String.format("ucsb subject with id %d deleted", id));
+        return ResponseEntity.ok().body(String.format("ucsb subject with id %s deleted", id));
 
     }
 

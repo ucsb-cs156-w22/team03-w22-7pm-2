@@ -90,7 +90,7 @@ public class StudentsControllerTests extends ControllerTestCase {
 
         // Tests with mocks for database actions
 
-        @WithMockUser(roles = { "USER" })
+        @WithMockUser(roles = { "ADMIN" })
         @Test
         public void api_students_post__user_logged_in__creates_a_student() throws Exception {
 
