@@ -106,7 +106,7 @@ public class UCSBSubjectController extends ApiController{
     }
 
     @ApiOperation(value = "Update a single UCSBSubject")
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("")
     public ResponseEntity<String> putSubjectById(
             @ApiParam("id") @RequestParam String id,
