@@ -30,9 +30,9 @@ export default function EarthquakesIndexPage() {
   //   { onSuccess: onDeleteSuccess },
   //   ['/api/earthquakes/purge']
   // );
-  const deleteCallback = async (data) => {
-    deleteMutation.mutate(data);
-  };
+  // const deleteCallback = async (data) => {
+  //   deleteMutation.mutate(data);
+  // };
   //<button onClick={deleteCallback}>Purge</button>;
   return (
     <BasicLayout>

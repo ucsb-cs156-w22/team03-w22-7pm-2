@@ -5,6 +5,20 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { MemoryRouter } from 'react-router-dom';
 import { currentUserFixtures } from 'fixtures/currentUserFixtures';
 
+const mockedNavigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockedNavigate,
+}));
+
+const mockedMutate = jest.fn();
+
+jest.mock('main/utils/useBackend', () => ({
+  ...jest.requireActual('main/utils/useBackend'),
+  useBackendMutation: () => ({ mutate: mockedMutate }),
+}));
+
 describe('EarthquakesTable tests', () => {
   const queryClient = new QueryClient();
 

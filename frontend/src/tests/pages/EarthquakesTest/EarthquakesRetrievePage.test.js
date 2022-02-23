@@ -61,6 +61,7 @@ describe('EarthquakesRetrievePage tests', () => {
     const earthquake = {
       distance: 5,
       minMag: 6.9,
+      length: 1,
     };
 
     axiosMock.onPost('/api/earthquakes/retrieve').reply(202, earthquake);
@@ -97,7 +98,7 @@ describe('EarthquakesRetrievePage tests', () => {
       distance: '5',
     });
 
-    expect(mockToast).toBeCalledWith('2 Earthquakes retrieved');
+    expect(mockToast).toBeCalledWith('1 Earthquakes retrieved');
     expect(mockNavigate).toBeCalledWith({ to: '/earthquakes/list' });
   });
 });
