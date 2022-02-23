@@ -97,7 +97,7 @@ describe('EarthquakesRetrievePage tests', () => {
       distance: '5',
     });
 
-    expect(mockToast).toBeCalledWith('1 Earthquakes retrieved');
+    expect(mockToast).toBeCalledWith('2 Earthquakes retrieved');
     expect(mockNavigate).toBeCalledWith({ to: '/earthquakes/list' });
   });
 });

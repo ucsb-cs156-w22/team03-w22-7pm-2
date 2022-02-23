@@ -15,7 +15,7 @@ export default function EarthquakesRetrievePage() {
   });
 
   const onSuccess = (earthquakes) => {
-    toast(`1 Earthquakes retrieved`);
+    toast(`${earthquakes.length} Earthquakes retrieved`);
   };
 
   const mutation = useBackendMutation(
@@ -39,7 +39,6 @@ export default function EarthquakesRetrievePage() {
     <BasicLayout>
       <div className="pt-2">
         <h1>Retrieve New Earthquakes</h1>
-
         <EarthquakesForm submitAction={onSubmit} />
       </div>
     </BasicLayout>
