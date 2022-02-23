@@ -17,9 +17,6 @@ import StudentsCreatePage from 'main/pages/Students/StudentsCreatePage';
 import UCSBSubjectsIndexPage from 'main/pages/UCSBSubjects/UCSBSubjectsIndexPage';
 import UCSBSubjectsCreatePage from 'main/pages/UCSBSubjects/UCSBSubjectsCreatePage';
 
-import CollegiateSubredditsIndexPage from 'main/pages/CollegiateSubreddits/CollegiateSubredditsIndexPage';
-import CollegiateSubredditsCreatePage from 'main/pages/CollegiateSubreddits/CollegiateSubredditsCreatePage';
-
 import EarthquakesIndexPage from 'main/pages/Earthquakes/EarthquakesIndexPage';
 import EarthquakesRetrievePage from 'main/pages/Earthquakes/EarthquakesRetrievePage';
 
@@ -128,13 +125,12 @@ function App() {
             />
           </>
         )}
-
         {hasRole(currentUser, 'ROLE_USER') && (
           <>
             <Route
               exact
-              path="/collegiatesubreddits/list"
-              element={<CollegiateSubredditsIndexPage />}
+              path="/UCSBSubjects/list"
+              element={<UCSBSubjectsIndexPage />}
             />
           </>
         )}
@@ -142,13 +138,8 @@ function App() {
           <>
             <Route
               exact
-              path="/collegiatesubreddits/edit/:id"
-              element={<UCollegiateSubredditsEditPage />}
-            />
-            <Route
-              exact
-              path="/collegiatesubreddits/create"
-              element={<CollegiateSubredditsCreatePage />}
+              path="/UCSBSubjects/create"
+              element={<UCSBSubjectsCreatePage />}
             />
           </>
         )}
