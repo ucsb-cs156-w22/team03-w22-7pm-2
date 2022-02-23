@@ -78,11 +78,5 @@ describe('EarthquakesTable tests', () => {
     expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
       'abcd5678abcd5678abcd5678'
     );
-    expect(getByTestId(`${testId}-cell-row-0-col-title`)).toHaveTextContent(
-      'M 2.2 - 10km ESE of Ojai, CA'
-    );
-    expect(getByTestId(`${testId}-cell-row-1-col-title`)).toHaveTextContent(
-      'M 6.9 - 21km S of Cupertino, CA'
-    );
   });
 });

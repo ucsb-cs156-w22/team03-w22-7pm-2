@@ -14,7 +14,6 @@ export default function EarthquakesTable({ earthquakes, currentUser }) {
       accessor: (row) => (
         <a href={row.properties.url}>{row.properties.title}</a>
       ),
-      index: 'title',
       id: 'title',
     },
     {
