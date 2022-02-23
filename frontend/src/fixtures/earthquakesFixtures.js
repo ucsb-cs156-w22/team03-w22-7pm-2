@@ -6,7 +6,7 @@ const earthquakesFixtures = {
       mag: '2.16',
       place: '10km ESE of Ojai, CA',
       time: '1644571919000',
-      url: `https://earthquake.usgs.gov/`,
+      url: 'https://earthquake.usgs.gov/',
     },
     {
       id: 'abcd5678abcd5678abcd5678',

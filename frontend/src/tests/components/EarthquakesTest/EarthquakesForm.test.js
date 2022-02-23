@@ -31,14 +31,14 @@ describe('EarthquakesForm tests', () => {
   //   );
   //   await waitFor(() =>
   //     expect(
-  //       getByTestId(/EarthquakesForm-distanceFromStorke/)
+  //       getByTestId(/EarthquakesForm-distance/)
   //     ).toBeInTheDocument()
   //   );
-  //   expect(getByText(/distanceFromStorke/)).toBeInTheDocument();
-  //   expect(getByTestId(/EarthquakesForm-distanceFromStorke/)).toHaveValue('5');
+  //   expect(getByText(/distance/)).toBeInTheDocument();
+  //   expect(getByTestId(/EarthquakesForm-distance/)).toHaveValue('5');
   // });
 
-  test('Correct Error messsages on missing input', async () => {
+  test('Correct Error messages on missing input', async () => {
     const { getByTestId, getByText } = render(
       <Router>
         <EarthquakesForm />
@@ -66,20 +66,16 @@ describe('EarthquakesForm tests', () => {
       </Router>
     );
     await waitFor(() =>
-      expect(
-        getByTestId('EarthquakesForm-distanceFromStorke')
-      ).toBeInTheDocument()
+      expect(getByTestId('EarthquakesForm-distance')).toBeInTheDocument()
     );
 
-    const distanceFromStorkeField = getByTestId(
-      'EarthquakesForm-distanceFromStorke'
-    );
+    const distanceField = getByTestId('EarthquakesForm-distance');
 
     const minMagField = getByTestId('EarthquakesForm-minMag');
 
     const submitButton = getByTestId('EarthquakesForm-submit');
 
-    fireEvent.change(distanceFromStorkeField, { target: { value: '5' } });
+    fireEvent.change(distanceField, { target: { value: '5' } });
     fireEvent.change(minMagField, {
       target: { value: '6.9' },
     });

@@ -59,7 +59,7 @@ describe('EarthquakesRetrievePage tests', () => {
   test('when you fill in the form and hit submit, it makes a request to the backend', async () => {
     const queryClient = new QueryClient();
     const earthquake = {
-      distanceFromStorke: 5,
+      distance: 5,
       minMag: 6.9,
     };
 
@@ -74,18 +74,14 @@ describe('EarthquakesRetrievePage tests', () => {
     );
 
     await waitFor(() => {
-      expect(
-        getByTestId('EarthquakesForm-distanceFromStorke')
-      ).toBeInTheDocument();
+      expect(getByTestId('EarthquakesForm-distance')).toBeInTheDocument();
     });
 
-    const distanceFromStorkeField = getByTestId(
-      'EarthquakesForm-distanceFromStorke'
-    );
+    const distanceField = getByTestId('EarthquakesForm-distance');
     const minMagField = getByTestId('EarthquakesForm-minMag');
     const submitButton = getByTestId('EarthquakesForm-submit');
 
-    fireEvent.change(distanceFromStorkeField, { target: { value: '5' } });
+    fireEvent.change(distanceField, { target: { value: '5' } });
     fireEvent.change(minMagField, {
       target: { value: '6.9' },
     });
@@ -98,7 +94,7 @@ describe('EarthquakesRetrievePage tests', () => {
 
     expect(axiosMock.history.post[0].params).toEqual({
       minMag: '6.9',
-      distanceFromStorke: '5',
+      distance: '5',
     });
 
     expect(mockToast).toBeCalledWith('1 Earthquakes retrieved');

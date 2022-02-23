@@ -13,9 +13,9 @@ export default function EarthquakesRetrievePage() {
       minMag: earthquakes.minMag,
     },
   });
-
+  // metadata = super.earthquakes.metadata;
   const onSuccess = (earthquakes) => {
-    toast(`${earthquakes.count} Earthquakes retrieved`);
+    toast(`${earthquakes} Earthquakes retrieved`);
   };
 
   const mutation = useBackendMutation(
