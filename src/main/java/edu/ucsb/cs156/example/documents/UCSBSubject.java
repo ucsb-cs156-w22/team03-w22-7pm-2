@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 @Data
 @NoArgsConstructor
@@ -15,7 +17,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "UCSBSubjects")
 public class UCSBSubject {
     @Id
-    private long id;
+    private String id;
+
     private String subjectCode;
     private String subjectTranslation;
     private String deptCode;

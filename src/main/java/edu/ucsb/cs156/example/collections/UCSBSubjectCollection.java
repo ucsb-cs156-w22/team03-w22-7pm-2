@@ -11,7 +11,6 @@ import edu.ucsb.cs156.example.documents.UCSBSubject;
 @Repository
 public interface UCSBSubjectCollection extends MongoRepository<UCSBSubject, ObjectId> {
   Optional<UCSBSubject> findBySubjectCode(String subjectCode);
-  Optional<UCSBSubject> findById(long id);
-  Optional<UCSBSubject> deleteById(long id);
-  Optional<UCSBSubject> findOneBySubjectTranslation(String subjectTranslation);
+  Optional<UCSBSubject> findById(String id);
+  Optional<UCSBSubject> deleteById(String id);
 }
