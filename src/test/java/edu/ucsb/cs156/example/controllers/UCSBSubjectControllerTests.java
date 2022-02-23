@@ -44,7 +44,7 @@ public class UCSBSubjectControllerTests extends ControllerTestCase {
 
 
         //test for /all endpoint
-    @WithMockUser(roles = { "ADMIN" })
+    @WithMockUser(roles = { "USER" })
     @Test
     public void api_all() throws Exception {
 
@@ -83,7 +83,7 @@ public class UCSBSubjectControllerTests extends ControllerTestCase {
                 .subjectCode("Test Subject Code")
                 .relatedDeptCode("Test related department code")
                 .inactive(true)
-                .id(0L)
+                .id("0L")
                 .build();
 
         when(ucsbsubjectCollection.save(eq(expectedSubject))).thenReturn(expectedSubject);
@@ -108,8 +108,8 @@ public class UCSBSubjectControllerTests extends ControllerTestCase {
     public void api_get_id_returns_a_subject_that_exists() throws Exception {
 
         // arrange
-        UCSBSubject expectedUCSBSubject = UCSBSubject.builder().id(1L).subjectCode("code 1").subjectTranslation("translation 1").deptCode("dept code 1").collegeCode("college code 1").relatedDeptCode("related dept code 1").inactive(true).build();
-        when(ucsbsubjectCollection.findById(eq(1L))).thenReturn(Optional.of(expectedUCSBSubject));
+        UCSBSubject expectedUCSBSubject = UCSBSubject.builder().id("1L").subjectCode("code 1").subjectTranslation("translation 1").deptCode("dept code 1").collegeCode("college code 1").relatedDeptCode("related dept code 1").inactive(true).build();
+        when(ucsbsubjectCollection.findById(eq("1L"))).thenReturn(Optional.of(expectedUCSBSubject));
 
         // act
         MvcResult response = mockMvc.perform(get("/api/UCSBSubjects?id=1"))
@@ -117,7 +117,7 @@ public class UCSBSubjectControllerTests extends ControllerTestCase {
 
         // assert
 
-        verify(ucsbsubjectCollection, times(1)).findById(eq(1L));
+        verify(ucsbsubjectCollection, times(1)).findById(eq("1L"));
         String expectedJson = mapper.writeValueAsString(expectedUCSBSubject);
         String responseString = response.getResponse().getContentAsString();
         assertEquals(expectedJson, responseString);
@@ -129,7 +129,7 @@ public class UCSBSubjectControllerTests extends ControllerTestCase {
     public void api_get_id_returns_a_subject_that_does_not_exist() throws Exception {
 
         // arrange
-        when(ucsbsubjectCollection.findById(eq(7L))).thenReturn(Optional.empty());
+        when(ucsbsubjectCollection.findById(eq("7L"))).thenReturn(Optional.empty());
 
         // act
         MvcResult response = mockMvc.perform(get("/api/UCSBSubjects?id=7"))
@@ -137,7 +137,7 @@ public class UCSBSubjectControllerTests extends ControllerTestCase {
 
         // assert
 
-        verify(ucsbsubjectCollection, times(1)).findById(eq(7L));
+        verify(ucsbsubjectCollection, times(1)).findById(eq("7L"));
         String responseString = response.getResponse().getContentAsString();
         assertEquals("ucsb subject with id 7 not found", responseString);
     }
@@ -156,16 +156,16 @@ public class UCSBSubjectControllerTests extends ControllerTestCase {
                 .subjectCode("Test Subject Code")
                 .relatedDeptCode("Test related department code")
                 .inactive(true)
-                .id(77L)
+                .id("77L")
                 .build();
 
-        UCSBSubject updatedUCSBSubject = UCSBSubject.builder().subjectTranslation("translation 1").deptCode("dept code 1").collegeCode("college code 1").subjectCode("code 2").relatedDeptCode("related dept code 1").inactive(false).id(77L).build();
-        UCSBSubject correctUCSBSubject = UCSBSubject.builder().subjectTranslation("translation 1").deptCode("dept code 1").collegeCode("college code 1").subjectCode("code 2").relatedDeptCode("related dept code 1").inactive(false).id(77L).build();
+        UCSBSubject updatedUCSBSubject = UCSBSubject.builder().subjectTranslation("translation 1").deptCode("dept code 1").collegeCode("college code 1").subjectCode("code 2").relatedDeptCode("related dept code 1").inactive(false).id("77L").build();
+        UCSBSubject correctUCSBSubject = UCSBSubject.builder().subjectTranslation("translation 1").deptCode("dept code 1").collegeCode("college code 1").subjectCode("code 2").relatedDeptCode("related dept code 1").inactive(false).id("77L").build();
 
         String requestBody = mapper.writeValueAsString(updatedUCSBSubject);
         String expectedReturn = mapper.writeValueAsString(correctUCSBSubject);
 
-        when(ucsbsubjectCollection.findById(eq(77L))).thenReturn(Optional.of(ucsbsubject1));
+        when(ucsbsubjectCollection.findById(eq("77L"))).thenReturn(Optional.of(ucsbsubject1));
 
         // act
         MvcResult response = mockMvc.perform(
@@ -177,7 +177,7 @@ public class UCSBSubjectControllerTests extends ControllerTestCase {
                 .andExpect(status().isOk()).andReturn();
 
         // assert
-        verify(ucsbsubjectCollection, times(1)).findById(77L);
+        verify(ucsbsubjectCollection, times(1)).findById("77L");
         verify(ucsbsubjectCollection, times(1)).save(correctUCSBSubject);
         String responseString = response.getResponse().getContentAsString();
         assertEquals(expectedReturn, responseString);
@@ -196,12 +196,12 @@ public class UCSBSubjectControllerTests extends ControllerTestCase {
                 .subjectCode("Test Subject Code")
                 .relatedDeptCode("Test related department code")
                 .inactive(true)
-                .id(77L)
+                .id("77L")
                 .build();
 
         String requestBody = mapper.writeValueAsString(updatedUCSBSubject);
 
-        when(ucsbsubjectCollection.findById(eq(77L))).thenReturn(Optional.empty());
+        when(ucsbsubjectCollection.findById(eq("77L"))).thenReturn(Optional.empty());
 
         // act
         MvcResult response = mockMvc.perform(
@@ -213,7 +213,7 @@ public class UCSBSubjectControllerTests extends ControllerTestCase {
                 .andExpect(status().isBadRequest()).andReturn();
 
         // assert
-        verify(ucsbsubjectCollection, times(1)).findById(77L);
+        verify(ucsbsubjectCollection, times(1)).findById("77L");
         String responseString = response.getResponse().getContentAsString();
         assertEquals("ucsb subject with id 77 not found", responseString);
     }
@@ -231,10 +231,10 @@ public class UCSBSubjectControllerTests extends ControllerTestCase {
                 .subjectCode("Test Subject Code")
                 .relatedDeptCode("Test related department code")
                 .inactive(true)
-                .id(15L)
+                .id("15L")
                 .build();
 
-                when(ucsbsubjectCollection.findById(eq(15L))).thenReturn(Optional.of(subject1));
+                when(ucsbsubjectCollection.findById(eq("15L"))).thenReturn(Optional.of(subject1));
 
                 // act
                 MvcResult response = mockMvc.perform(
@@ -243,8 +243,8 @@ public class UCSBSubjectControllerTests extends ControllerTestCase {
                         .andExpect(status().isOk()).andReturn();
 
                 // assert
-                verify(ucsbsubjectCollection, times(1)).findById(15L);
-                verify(ucsbsubjectCollection, times(1)).deleteById(15L);
+                verify(ucsbsubjectCollection, times(1)).findById("15L");
+                verify(ucsbsubjectCollection, times(1)).deleteById("15L");
                 String responseString = response.getResponse().getContentAsString();
                 assertEquals("ucsb subject with id 15 deleted", responseString);
         }
@@ -262,9 +262,9 @@ public class UCSBSubjectControllerTests extends ControllerTestCase {
                         .subjectCode("Test Subject Code")
                         .relatedDeptCode("Test related department code")
                         .inactive(true)
-                        .id(15L)
+                        .id("15L")
                         .build();
-                        when(ucsbsubjectCollection.findById(eq(15L))).thenReturn(Optional.empty());
+                        when(ucsbsubjectCollection.findById(eq("15L"))).thenReturn(Optional.empty());
 
                 // act
                 MvcResult response = mockMvc.perform(
@@ -273,7 +273,7 @@ public class UCSBSubjectControllerTests extends ControllerTestCase {
                         .andExpect(status().isBadRequest()).andReturn();
 
                 // assert
-                verify(ucsbsubjectCollection, times(1)).findById(15L);
+                verify(ucsbsubjectCollection, times(1)).findById("15L");
                 String responseString = response.getResponse().getContentAsString();
                 assertEquals("ucsb subject with id 15 not found", responseString);
         }

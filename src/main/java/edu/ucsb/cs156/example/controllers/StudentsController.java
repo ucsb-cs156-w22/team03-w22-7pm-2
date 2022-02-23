@@ -41,7 +41,7 @@ public class StudentsController extends ApiController {
     }
 
     @ApiOperation(value = "Add a Student to the collection")
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/post")
     public Student postStudent(
             @ApiParam("firstName") @RequestParam String firstName,
