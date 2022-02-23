@@ -155,8 +155,8 @@ describe('EarthquakesIndexPage tests', () => {
       queryByTestId(`${testId}-cell-row-0-col-id`)
     ).not.toBeInTheDocument();
   });
-  /** 
-  test('test what happens when you click delete, admin', async () => {
+
+  test('test what happens when you click purge, admin', async () => {
     setupAdminUser();
 
     const queryClient = new QueryClient();
@@ -190,5 +190,4 @@ describe('EarthquakesIndexPage tests', () => {
       expect(mockToast).toBeCalledWith('UCSBSubject with id 1 was deleted');
     });
   });
-  */
 });
