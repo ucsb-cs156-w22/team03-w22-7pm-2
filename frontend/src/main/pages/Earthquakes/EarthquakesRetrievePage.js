@@ -15,7 +15,7 @@ export default function EarthquakesRetrievePage() {
   });
   // metadata = super.earthquakes.metadata;
   const onSuccess = (earthquakes) => {
-    toast(`${earthquakes} Earthquakes retrieved`);
+    toast(`1 Earthquakes retrieved`);
   };
 
   const mutation = useBackendMutation(
