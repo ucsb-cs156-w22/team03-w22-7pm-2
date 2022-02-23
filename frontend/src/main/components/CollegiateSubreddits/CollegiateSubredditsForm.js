@@ -22,10 +22,10 @@ function CollegiateSubredditsForm({ initialCollegiateSubreddits, submitAction, b
     // Note that even this complex regex may still need some tweaks
 
     // Stryker disable next-line Regex
-    const isodate_regex = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
+    //const isodate_regex = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
     // here, commented line 25&28        
     // Stryker disable next-line all
-    const yyyyq_regex = /((19)|(20))\d{2}[1-4]/i; // Accepts from 1900-2099 followed by 1-4.  Close enough.
+    //const yyyyq_regex = /((19)|(20))\d{2}[1-4]/i; // Accepts from 1900-2099 followed by 1-4.  Close enough.
 
     return (
 
@@ -83,7 +83,7 @@ function CollegiateSubredditsForm({ initialCollegiateSubreddits, submitAction, b
                     id="subreddits"
                     type="text"
                     isInvalid={Boolean(errors.subreddits)}
-                    {...register("subreddits", { required: true, pattern: isodate_regex })}
+                    {...register("subreddits", { required: true })}
                 />
                 <Form.Control.Feedback type="invalid">
                     {errors.subreddits && 'Subreddits is required. '}

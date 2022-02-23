@@ -75,7 +75,7 @@ describe("CollegiateSubredditsCreatePage tests", () => {
         });
 
         const nameField = getByTestId("CollegiateSubredditsForm-name");
-        const locatonField = getByTestId("CollegiateSubredditsForm-locaton");
+        const locatonField = getByTestId("CollegiateSubredditsForm-location");
         const subredditsField = getByTestId("CollegiateSubredditsForm-subreddits");
         const submitButton = getByTestId("CollegiateSubredditsForm-submit");
 
