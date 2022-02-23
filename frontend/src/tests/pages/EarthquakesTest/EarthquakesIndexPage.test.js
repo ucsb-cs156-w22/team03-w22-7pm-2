@@ -156,16 +156,16 @@ describe('EarthquakesIndexPage tests', () => {
     ).not.toBeInTheDocument();
   });
 
-  test('test what happens when you click purge, admin', async () => {
+  test('test what happens when you click purge', async () => {
     setupAdminUser();
 
     const queryClient = new QueryClient();
     axiosMock
-      .onGet('/api/Earthquakes/all')
+      .onGet('/api/earthquakes/all')
       .reply(200, earthquakesFixtures.twoEarthquakes);
     axiosMock
-      .onDelete('/api/Earthquakes')
-      .reply(200, 'UCSBSubject with id 1 was deleted');
+      .onDelete('/api/earthquakes/purge')
+      .reply(200, 'Earthquakes have been purged');
 
     const { getByTestId } = render(
       <QueryClientProvider client={queryClient}>
@@ -179,15 +179,47 @@ describe('EarthquakesIndexPage tests', () => {
       expect(getByTestId(`${testId}-cell-row-0-col-id`)).toBeInTheDocument();
     });
 
-    expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent('1');
+    expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
+      'abcd1234abcd1234abcd1234'
+    );
+    expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
+      'abcd5678abcd5678abcd5678'
+    );
+    expect(getByTestId(`${testId}-cell-row-0-col-title`)).toHaveTextContent(
+      'M 2.2 - 10km ESE of Ojai, CA'
+    );
+    expect(getByTestId(`${testId}-cell-row-1-col-title`)).toHaveTextContent(
+      'M 6.9 - 21km S of Cupertino, CA'
+    );
+    expect(getByTestId(`${testId}-cell-row-0-col-mag`)).toHaveTextContent(
+      '2.16'
+    );
+    expect(getByTestId(`${testId}-cell-row-1-col-mag`)).toHaveTextContent(
+      '6.9'
+    );
+    expect(getByTestId(`${testId}-cell-row-0-col-place`)).toHaveTextContent(
+      '10km ESE of Ojai, CA'
+    );
+    expect(getByTestId(`${testId}-cell-row-1-col-place`)).toHaveTextContent(
+      '21km S of Cupertino, CA'
+    );
+    expect(getByTestId(`${testId}-cell-row-0-col-time`)).toHaveTextContent(
+      '1644571919000'
+    );
+    expect(getByTestId(`${testId}-cell-row-1-col-time`)).toHaveTextContent(
+      '1844531919000'
+    );
 
-    const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+    const deleteButton = getByTestId('EarthquakesIndex-purge');
     expect(deleteButton).toBeInTheDocument();
 
     fireEvent.click(deleteButton);
 
-    await waitFor(() => {
-      expect(mockToast).toBeCalledWith('UCSBSubject with id 1 was deleted');
-    });
+    await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
+
+    expect(getByTestId(`${testId}-cell-row-0-col-id`)).not.toBeInTheDocument();
+    await waitFor(() => expect(mockedMutate).toHaveBeenCalledTimes(1));
+
+    //expect(mockToast).toBeCalledWith('Earthquakes have been purged');
   });
 });
