@@ -161,10 +161,12 @@ describe('EarthquakesIndexPage tests', () => {
     const queryClient = new QueryClient();
     axiosMock
       .onGet('/api/earthquakes/all')
-      .reply(200, earthquakesFixtures.twoEarthquakes);
+      .replyOnce(200, earthquakesFixtures.twoEarthquakes)
+      .onGet('/api/earthquakes/all')
+      .reply(200, []); //prevents the call for GET in purge to reinsert twoEarthquakes
     axiosMock.onPost('/api/earthquakes/purge').reply(200);
 
-    const { getByTestId } = render(
+    const { queryByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <EarthquakesIndexPage />
@@ -173,10 +175,10 @@ describe('EarthquakesIndexPage tests', () => {
     );
 
     await waitFor(() => {
-      expect(getByTestId(`${testId}-cell-row-0-col-id`)).toBeInTheDocument();
+      expect(queryByTestId(`${testId}-cell-row-0-col-id`)).toBeInTheDocument();
     });
 
-    const deleteButton = getByTestId('EarthquakesIndex-purge');
+    const deleteButton = queryByTestId('EarthquakesIndex-purge');
     expect(deleteButton).toBeInTheDocument();
 
     fireEvent.click(deleteButton);
@@ -185,7 +187,10 @@ describe('EarthquakesIndexPage tests', () => {
 
     await waitFor(() => expect(mockToast).toBeCalled); //toastify is called only when backend mutation onDelete is successfully called
     expect(mockToast).toBeCalledWith('Earthquakes have been purged');
-    //we don't check that the table is cleared as the purge calls get again to update the table without refresh. however, in the test is calls
-    //for axios to re-insert twoEarthquakes
+    await waitFor(() =>
+      expect(
+        queryByTestId(`${testId}-cell-row-0-col-id`)
+      ).not.toBeInTheDocument()
+    );
   });
 });
