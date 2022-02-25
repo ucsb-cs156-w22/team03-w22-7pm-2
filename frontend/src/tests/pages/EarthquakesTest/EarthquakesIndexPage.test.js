@@ -158,14 +158,11 @@ describe('EarthquakesIndexPage tests', () => {
 
   test('test what happens when you click purge', async () => {
     setupAdminUser();
-
     const queryClient = new QueryClient();
     axiosMock
       .onGet('/api/earthquakes/all')
       .reply(200, earthquakesFixtures.twoEarthquakes);
-    axiosMock
-      .onDelete('/api/earthquakes/purge')
-      .reply(200, 'Earthquakes have been purged');
+    axiosMock.onPost('/api/earthquakes/purge').reply(200);
 
     const { getByTestId } = render(
       <QueryClientProvider client={queryClient}>
@@ -179,47 +176,16 @@ describe('EarthquakesIndexPage tests', () => {
       expect(getByTestId(`${testId}-cell-row-0-col-id`)).toBeInTheDocument();
     });
 
-    expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
-      'abcd1234abcd1234abcd1234'
-    );
-    expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
-      'abcd5678abcd5678abcd5678'
-    );
-    expect(getByTestId(`${testId}-cell-row-0-col-title`)).toHaveTextContent(
-      'M 2.2 - 10km ESE of Ojai, CA'
-    );
-    expect(getByTestId(`${testId}-cell-row-1-col-title`)).toHaveTextContent(
-      'M 6.9 - 21km S of Cupertino, CA'
-    );
-    expect(getByTestId(`${testId}-cell-row-0-col-mag`)).toHaveTextContent(
-      '2.16'
-    );
-    expect(getByTestId(`${testId}-cell-row-1-col-mag`)).toHaveTextContent(
-      '6.9'
-    );
-    expect(getByTestId(`${testId}-cell-row-0-col-place`)).toHaveTextContent(
-      '10km ESE of Ojai, CA'
-    );
-    expect(getByTestId(`${testId}-cell-row-1-col-place`)).toHaveTextContent(
-      '21km S of Cupertino, CA'
-    );
-    expect(getByTestId(`${testId}-cell-row-0-col-time`)).toHaveTextContent(
-      '1644571919000'
-    );
-    expect(getByTestId(`${testId}-cell-row-1-col-time`)).toHaveTextContent(
-      '1844531919000'
-    );
-
     const deleteButton = getByTestId('EarthquakesIndex-purge');
     expect(deleteButton).toBeInTheDocument();
 
     fireEvent.click(deleteButton);
 
-    await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
+    await waitFor(() => expect(axiosMock.history.post.length).toBe(1)); //checks that post was called
 
-    expect(getByTestId(`${testId}-cell-row-0-col-id`)).not.toBeInTheDocument();
-    await waitFor(() => expect(mockedMutate).toHaveBeenCalledTimes(1));
-
-    //expect(mockToast).toBeCalledWith('Earthquakes have been purged');
+    await waitFor(() => expect(mockToast).toBeCalled); //toastify is called only when backend mutation onDelete is successfully called
+    expect(mockToast).toBeCalledWith('Earthquakes have been purged');
+    //we don't check that the table is cleared as the purge calls get again to update the table without refresh. however, in the test is calls
+    //for axios to re-insert twoEarthquakes
   });
 });

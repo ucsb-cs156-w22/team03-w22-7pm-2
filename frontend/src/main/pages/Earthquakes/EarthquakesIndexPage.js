@@ -8,7 +8,7 @@ import { useBackendMutation } from 'main/utils/useBackend';
 import { Button } from 'react-bootstrap';
 import { onDeleteSuccess } from 'main/utils/EarthquakesUtils';
 
-export default function EarthquakesIndexPage({ buttonLabel = 'Purge' }) {
+export default function EarthquakesIndexPage() {
   const currentUser = useCurrentUser();
 
   const {
@@ -32,6 +32,7 @@ export default function EarthquakesIndexPage({ buttonLabel = 'Purge' }) {
     {
       onSuccess: () => onDeleteSuccess('Earthquakes have been purged'),
     },
+    // Stryker disable next-line all : hard to set up test for caching
     ['/api/earthquakes/all']
   );
 
@@ -47,10 +48,9 @@ export default function EarthquakesIndexPage({ buttonLabel = 'Purge' }) {
         <Button
           variant="danger"
           data-testid="EarthquakesIndex-purge"
-          type="submit"
           onClick={deleteCallback}
         >
-          {buttonLabel}
+          Purge
         </Button>
       </div>
     </BasicLayout>
