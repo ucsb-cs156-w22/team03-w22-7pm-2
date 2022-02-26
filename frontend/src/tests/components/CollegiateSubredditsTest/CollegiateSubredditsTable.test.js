@@ -68,7 +68,7 @@ describe("UserTable tests", () => {
 
     );
 
-    const expectedHeaders = ["id", "Name", "Location", "Subreddits"];
+    const expectedHeaders = ["id", "Name", "Location", "subreddits"];
     const expectedFields = ["id", "name", "location", "subreddits"];
     const testId = "CollegiateSubredditsTable";
 

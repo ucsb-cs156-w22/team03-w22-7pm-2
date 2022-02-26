@@ -97,7 +97,7 @@ describe("CollegiateSubredditsCreatePage tests", () => {
         });
 
         expect(mockToast).toBeCalledWith("New collegiateSubreddits Created - id: 1 name: name");
-        expect(mockNavigate).toBeCalledWith({ "to": "/CollegiateSubreddits/list" });
+        expect(mockNavigate).toBeCalledWith({ "to": "/collegiateSubreddits/list" });
     });
 
 
