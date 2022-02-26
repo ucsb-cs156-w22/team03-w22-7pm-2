@@ -9,11 +9,11 @@ export default function CollegiateSubredditsIndexPage() {
 
   const currentUser = useCurrentUser();
 
-  const { data: collegiatesubreddits, error: _error, status: _status } =
+  const { data: collegiateSubreddits, error: _error, status: _status } =
     useBackend(
       // Stryker disable next-line all : don't test internal caching of React Query
-      ["/api/collegiatesubreddits/all"],
-      { method: "GET", url: "/api/collegiatesubreddits/all" },
+      ["/api/collegiateSubreddits/all"],
+      { method: "GET", url: "/api/collegiateSubreddits/all" },
       []
     );
 
@@ -21,7 +21,7 @@ export default function CollegiateSubredditsIndexPage() {
     <BasicLayout>
       <div className="pt-2">
         <h1>CollegiateSubreddits</h1>
-        <CollegiateSubredditsTable collegiatesubreddits={collegiatesubreddits} currentUser={currentUser} />
+        <CollegiateSubredditsTable collegiatesubreddits={collegiateSubreddits} currentUser={currentUser} />
       </div>
     </BasicLayout>
   )

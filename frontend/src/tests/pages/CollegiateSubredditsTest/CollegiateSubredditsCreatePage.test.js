@@ -54,13 +54,13 @@ describe("CollegiateSubredditsCreatePage tests", () => {
 
         const queryClient = new QueryClient();
         const CollegiateSubreddits = {
-            id: 17,
+            id: 1,
             name: "name",
             location: "location",
             subreddits: "subreddits"
         };
 
-        axiosMock.onPost("/api/collegiatesubreddits/post").reply( 202, CollegiateSubreddits );
+        axiosMock.onPost("/api/collegiateSubreddits/post").reply( 202, CollegiateSubreddits );
 
         const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
@@ -75,12 +75,12 @@ describe("CollegiateSubredditsCreatePage tests", () => {
         });
 
         const nameField = getByTestId("CollegiateSubredditsForm-name");
-        const locatonField = getByTestId("CollegiateSubredditsForm-location");
+        const locationField = getByTestId("CollegiateSubredditsForm-location");
         const subredditsField = getByTestId("CollegiateSubredditsForm-subreddits");
         const submitButton = getByTestId("CollegiateSubredditsForm-submit");
 
         fireEvent.change(nameField, { target: { value: 'name' } });
-        fireEvent.change(locatonField, { target: { value: 'location' } });
+        fireEvent.change(locationField, { target: { value: 'location' } });
         fireEvent.change(subredditsField, { target: { value: 'subreddits' } });
 
         expect(submitButton).toBeInTheDocument();
@@ -92,11 +92,11 @@ describe("CollegiateSubredditsCreatePage tests", () => {
         expect(axiosMock.history.post[0].params).toEqual(
             {
             "name": "name",
-            "locaton": "location",
+            "location": "location",
             "subreddits": "subreddits"
         });
 
-        expect(mockToast).toBeCalledWith("New CollegiateSubreddits Created - id: 1 name: name");
+        expect(mockToast).toBeCalledWith("New collegiateSubreddits Created - id: 1 name: name");
         expect(mockNavigate).toBeCalledWith({ "to": "/CollegiateSubreddits/list" });
     });
 

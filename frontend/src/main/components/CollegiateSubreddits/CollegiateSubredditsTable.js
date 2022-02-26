@@ -6,12 +6,12 @@ import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/CollegiateS
 import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 
-export default function UCSBDatesTable({ dates, currentUser }) {
+export default function CollegiateSubredditsTable({ subreddits, currentUser }) {
 
     const navigate = useNavigate();
 
     const editCallback = (cell) => {
-        navigate(`/collegiatesubreddits/edit/${cell.row.values.id}`)//changed
+        navigate(`/collegiateSubreddits/edit/${cell.row.values.id}`)//changed
     }
 
     // Stryker disable all : hard to test for query caching
@@ -19,7 +19,7 @@ export default function UCSBDatesTable({ dates, currentUser }) {
     const deleteMutation = useBackendMutation(
         cellToAxiosParamsDelete,
         { onSuccess: onDeleteSuccess },
-        ["/api/collegiatesubreddits/all"]//changed
+        ["/api/collegiateSubreddits/all"]//changed
     );
     // Stryker enable all 
 
@@ -53,10 +53,10 @@ export default function UCSBDatesTable({ dates, currentUser }) {
 
     // Stryker disable next-line ArrayDeclaration : [columns] is a performance optimization
     const memoizedColumns = React.useMemo(() => columns, [columns]);
-    const memoizedDates = React.useMemo(() => dates, [dates]);
+    const memoizedSubreddits = React.useMemo(() => subreddits, [subreddits]);
 
     return <OurTable
-        data={memoizedDates}
+        data={memoizedSubreddits}
         columns={memoizedColumns}
         testid={"CollegiateSubredditsTable"}//changed
     />;

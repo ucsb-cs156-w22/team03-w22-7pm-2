@@ -11,10 +11,10 @@ export default function collegiatesubreddits() {
   const { data: collegiatesubreddits, error: error, status: status } =
     useBackend(
       // Stryker disable next-line all : don't test internal caching of React Query
-      [`/api/collegiatesubreddits?id=${id}`],
+      [`/api/collegiateSubreddits?id=${id}`],
       {  // Stryker disable next-line all : GET is the default, so changing this to "" doesn't introduce a bug
         method: "GET",
-        url: `/api/collegiatesubreddits`,
+        url: `/api/collegiateSubreddits`,
         params: {
           id
         }
@@ -23,7 +23,7 @@ export default function collegiatesubreddits() {
 
 
   const objectToAxiosPutParams = (collegiatesubreddits) => ({
-    url: "/api/collegiatesubreddits",
+    url: "/api/collegiateSubreddits",
     method: "PUT",
     params: {
       id: collegiatesubreddits.id,
@@ -43,7 +43,7 @@ export default function collegiatesubreddits() {
     objectToAxiosPutParams,
     { onSuccess },
     // Stryker disable next-line all : hard to set up test for caching
-    [`/api/collegiatesubreddits?id=${id}`]
+    [`/api/collegiateSubreddits?id=${id}`]
   );
 
   const { isSuccess } = mutation
@@ -53,7 +53,7 @@ export default function collegiatesubreddits() {
   }
 
   if (isSuccess) {
-    return <Navigate to="/collegiatesubreddits/list" />
+    return <Navigate to="/collegiateSubreddits/list" />
   }
 
   return (

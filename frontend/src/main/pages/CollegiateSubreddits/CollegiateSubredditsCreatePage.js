@@ -6,8 +6,8 @@ import { toast } from "react-toastify";
 
 export default function CollegiateSubredditsCreatePage() {
 
-  const objectToAxiosParams = (ucsbDate) => ({
-    url: "/api/collegiatesubreddits/post",
+  const objectToAxiosParams = (collegiatesubreddits) => ({
+    url: "/api/collegiateSubreddits/post",
     method: "POST",
     params: {
       name: collegiatesubreddits.name,
@@ -17,14 +17,14 @@ export default function CollegiateSubredditsCreatePage() {
   });
 
   const onSuccess = (collegiatesubreddits) => {
-    toast(`New collegiatesubreddits Created - id: ${collegiatesubreddits.id} name: ${collegiatesubreddits.name}`);
+    toast(`New collegiateSubreddits Created - id: ${collegiatesubreddits.id} name: ${collegiatesubreddits.name}`);
   }
 
   const mutation = useBackendMutation(
     objectToAxiosParams,
      { onSuccess }, 
      // Stryker disable next-line all : hard to set up test for caching
-     ["/api/collegiatesubreddits/all"]
+     ["/api/collegiateSubreddits/all"]
      );
 
   const { isSuccess } = mutation
@@ -34,13 +34,13 @@ export default function CollegiateSubredditsCreatePage() {
   }
 
   if (isSuccess) {
-    return <Navigate to="/collegiatesubreddits/list" />
+    return <Navigate to="/collegiateSubreddits/list" />
   }
 
   return (
     <BasicLayout>
       <div className="pt-2">
-        <h1>Create New collegiatesubreddits</h1>
+        <h1>Create New collegiateSubreddits</h1>
 
         <CollegiateSubredditsForm submitAction={onSubmit} />
 
