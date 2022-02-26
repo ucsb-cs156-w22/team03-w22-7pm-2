@@ -1,11 +1,11 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
-import { studentFixtures } from 'fixtures/studentFixtures';
-import StudentsTable from 'main/components/Students/StudentsTable';
+import { earthquakesFixtures } from 'fixtures/earthquakesFixtures';
+import EarthquakesTable from 'main/components/Earthquakes/EarthquakesTable';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { MemoryRouter } from 'react-router-dom';
 import { currentUserFixtures } from 'fixtures/currentUserFixtures';
 
-describe('StudentsTable tests', () => {
+describe('EarthquakesTable tests', () => {
   const queryClient = new QueryClient();
 
   test('renders without crashing for empty table with user not logged in', () => {
@@ -14,7 +14,7 @@ describe('StudentsTable tests', () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <StudentsTable students={[]} currentUser={currentUser} />
+          <EarthquakesTable earthquakes={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
     );
@@ -26,7 +26,7 @@ describe('StudentsTable tests', () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <StudentsTable students={[]} currentUser={currentUser} />
+          <EarthquakesTable earthquakes={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
     );
@@ -38,29 +38,29 @@ describe('StudentsTable tests', () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <StudentsTable students={[]} currentUser={currentUser} />
+          <EarthquakesTable earthquakes={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
     );
   });
 
-  test('Has the expected colum headers and content for adminUser', () => {
+  test('Has the expected column headers and content for adminUser', () => {
     const currentUser = currentUserFixtures.adminUser;
 
     const { getByText, getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <StudentsTable
-            students={studentFixtures.twoStudents}
+          <EarthquakesTable
+            earthquakes={earthquakesFixtures.twoEarthquakes}
             currentUser={currentUser}
           />
         </MemoryRouter>
       </QueryClientProvider>
     );
 
-    const expectedHeaders = ['id', 'First Name', 'Last Name', 'Perm'];
-    const expectedFields = ['id', 'firstName', 'lastName', 'perm'];
-    const testId = 'StudentsTable';
+    const expectedHeaders = ['id', 'Title', 'Magnitude', 'Place', 'Time'];
+    const expectedFields = ['id', 'title', 'mag', 'place', 'time'];
+    const testId = 'EarthquakesTable';
 
     expectedHeaders.forEach((headerText) => {
       const header = getByText(headerText);
@@ -78,11 +78,29 @@ describe('StudentsTable tests', () => {
     expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
       'abcd5678abcd5678abcd5678'
     );
-    expect(getByTestId(`${testId}-cell-row-0-col-firstName`)).toHaveTextContent(
-      'Chris'
+    expect(getByTestId(`${testId}-cell-row-0-col-title`)).toHaveTextContent(
+      'M 2.2 - 10km ESE of Ojai, CA'
     );
-    expect(getByTestId(`${testId}-cell-row-1-col-firstName`)).toHaveTextContent(
-      'Seth'
+    expect(getByTestId(`${testId}-cell-row-1-col-title`)).toHaveTextContent(
+      'M 6.9 - 21km S of Cupertino, CA'
+    );
+    expect(getByTestId(`${testId}-cell-row-0-col-mag`)).toHaveTextContent(
+      '2.16'
+    );
+    expect(getByTestId(`${testId}-cell-row-1-col-mag`)).toHaveTextContent(
+      '6.9'
+    );
+    expect(getByTestId(`${testId}-cell-row-0-col-place`)).toHaveTextContent(
+      '10km ESE of Ojai, CA'
+    );
+    expect(getByTestId(`${testId}-cell-row-1-col-place`)).toHaveTextContent(
+      '21km S of Cupertino, CA'
+    );
+    expect(getByTestId(`${testId}-cell-row-0-col-time`)).toHaveTextContent(
+      '1644571919000'
+    );
+    expect(getByTestId(`${testId}-cell-row-1-col-time`)).toHaveTextContent(
+      '1844531919000'
     );
   });
 });

@@ -1,29 +1,28 @@
 import BasicLayout from 'main/layouts/BasicLayout/BasicLayout';
-import UCSBDateForm from 'main/components/UCSBDates/UCSBDateForm';
+import EarthquakesForm from 'main/components/Earthquakes/EarthquakesForm';
 import { Navigate } from 'react-router-dom';
 import { useBackendMutation } from 'main/utils/useBackend';
 import { toast } from 'react-toastify';
 
-export default function UCSBDatesCreatePage() {
-  const objectToAxiosParams = (ucsbDate) => ({
-    url: '/api/ucsbdates/post',
+export default function EarthquakesRetrievePage() {
+  const objectToAxiosParams = (earthquakes) => ({
+    url: '/api/earthquakes/retrieve',
     method: 'POST',
     params: {
-      quarterYYYYQ: ucsbDate.quarterYYYYQ,
-      name: ucsbDate.name,
-      localDateTime: ucsbDate.localDateTime,
+      distance: earthquakes.distance,
+      minMag: earthquakes.minMag,
     },
   });
 
-  const onSuccess = (ucsbDate) => {
-    toast(`New ucsbDate Created - id: ${ucsbDate.id} name: ${ucsbDate.name}`);
+  const onSuccess = (earthquakes) => {
+    toast(`${earthquakes.length} Earthquakes retrieved`);
   };
 
   const mutation = useBackendMutation(
     objectToAxiosParams,
     { onSuccess },
     // Stryker disable next-line all : hard to set up test for caching
-    ['/api/ucsbdates/all']
+    ['/api/earthquakes/all']
   );
 
   const { isSuccess } = mutation;
@@ -33,15 +32,14 @@ export default function UCSBDatesCreatePage() {
   };
 
   if (isSuccess) {
-    return <Navigate to="/ucsbdates/list" />;
+    return <Navigate to="/earthquakes/list" />;
   }
 
   return (
     <BasicLayout>
       <div className="pt-2">
-        <h1>Create New UCSBDate</h1>
-
-        <UCSBDateForm submitAction={onSubmit} />
+        <h1>Retrieve New Earthquakes</h1>
+        <EarthquakesForm submitAction={onSubmit} />
       </div>
     </BasicLayout>
   );
