@@ -70,13 +70,13 @@ describe("CollegiateSubredditsEditPage tests", () => {
             axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.userOnly);
             axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
             axiosMock.onGet("/api/collegiateSubreddits", { params: { id: 1 } }).reply(200, {
-                id: 1,
+                id: "1",
                 name: "name",
                 location: 'location',
                 subreddit: "subreddit"
             });
             axiosMock.onPut('/api/collegiateSubreddits').reply(200, {
-                id: 1,
+                id: "1",
                 name: "name",
                 location: 'location',
                 subreddit: "subreddit"
@@ -146,7 +146,7 @@ describe("CollegiateSubredditsEditPage tests", () => {
 
             expect(submitButton).toBeInTheDocument();
 
-            fireEvent.change(nameField, { target: { value: 'New name' } })
+            fireEvent.change(nameField, { target: { value: "New name" } })
             fireEvent.change(locationField, { target: { value: "UCSB" } })
             fireEvent.change(subredditField, { target: { value: "UCSB subreddit" } })
 
@@ -159,7 +159,7 @@ describe("CollegiateSubredditsEditPage tests", () => {
             expect(axiosMock.history.put.length).toBe(1); // times called
             expect(axiosMock.history.put[0].params).toEqual({ id: 1 });
             expect(axiosMock.history.put[0].data).toBe(JSON.stringify({
-                name: 'New name',
+                name: "New name",
                 location: "UCSB",
                 subreddit: "UCSB subreddit"
             })); // posted object

@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom'
 import { useBackend, useBackendMutation } from "main/utils/useBackend";
 import { toast } from "react-toastify";
 
-export default function collegiateSubreddits() {
+export default function CollegiateSubredditsEditPage() {
   let { id } = useParams();
 
   const { data: collegiateSubreddits, error: error, status: status } =
@@ -61,7 +61,7 @@ export default function collegiateSubreddits() {
       <div className="pt-2">
         <h1>Edit CollegiateSubreddits</h1>
         {collegiateSubreddits &&
-          <CollegiateSubredditsForm initialCollegiateSubredditsForm={collegiateSubreddits} submitAction={onSubmit} buttonLabel="Update" />
+          <CollegiateSubredditsForm initialCollegiateSubreddits={collegiateSubreddits} submitAction={onSubmit} buttonLabel="Update" />
         }
       </div>
     </BasicLayout>
