@@ -155,19 +155,18 @@ describe('EarthquakesIndexPage tests', () => {
       queryByTestId(`${testId}-cell-row-0-col-id`)
     ).not.toBeInTheDocument();
   });
-  /** 
-  test('test what happens when you click delete, admin', async () => {
-    setupAdminUser();
 
+  test('test what happens when you click purge', async () => {
+    setupAdminUser();
     const queryClient = new QueryClient();
     axiosMock
-      .onGet('/api/Earthquakes/all')
-      .reply(200, earthquakesFixtures.twoEarthquakes);
-    axiosMock
-      .onDelete('/api/Earthquakes')
-      .reply(200, 'UCSBSubject with id 1 was deleted');
+      .onGet('/api/earthquakes/all')
+      .replyOnce(200, earthquakesFixtures.twoEarthquakes)
+      .onGet('/api/earthquakes/all')
+      .reply(200, []); //prevents the call for GET in purge to reinsert twoEarthquakes
+    axiosMock.onPost('/api/earthquakes/purge').reply(200);
 
-    const { getByTestId } = render(
+    const { queryByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <EarthquakesIndexPage />
@@ -176,19 +175,22 @@ describe('EarthquakesIndexPage tests', () => {
     );
 
     await waitFor(() => {
-      expect(getByTestId(`${testId}-cell-row-0-col-id`)).toBeInTheDocument();
+      expect(queryByTestId(`${testId}-cell-row-0-col-id`)).toBeInTheDocument();
     });
 
-    expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent('1');
-
-    const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+    const deleteButton = queryByTestId('EarthquakesIndex-purge');
     expect(deleteButton).toBeInTheDocument();
 
     fireEvent.click(deleteButton);
 
-    await waitFor(() => {
-      expect(mockToast).toBeCalledWith('UCSBSubject with id 1 was deleted');
-    });
+    await waitFor(() => expect(axiosMock.history.post.length).toBe(1)); //checks that post was called
+
+    await waitFor(() => expect(mockToast).toBeCalled); //toastify is called only when backend mutation onDelete is successfully called
+    expect(mockToast).toBeCalledWith('Earthquakes have been purged');
+    await waitFor(() =>
+      expect(
+        queryByTestId(`${testId}-cell-row-0-col-id`)
+      ).not.toBeInTheDocument()
+    );
   });
-  */
 });
