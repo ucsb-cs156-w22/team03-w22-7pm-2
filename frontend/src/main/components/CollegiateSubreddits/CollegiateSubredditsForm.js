@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 
-function CollegiateSubredditsForm({ initialCollegiateSubreddits, submitAction, buttonLabel="Create" }) {
+function CollegiateSubredditsForm({ initialCollegiateSubreddit, submitAction, buttonLabel="Create" }) {
 
     // Stryker disable all
     const {
@@ -12,7 +12,7 @@ function CollegiateSubredditsForm({ initialCollegiateSubreddits, submitAction, b
         formState: { errors },
         handleSubmit,
     } = useForm(
-        { defaultValues: initialCollegiateSubreddits || {}, }
+        { defaultValues: initialCollegiateSubreddit || {}, }
     );
     // Stryker enable all
 
@@ -31,7 +31,7 @@ function CollegiateSubredditsForm({ initialCollegiateSubreddits, submitAction, b
 
         <Form onSubmit={handleSubmit(submitAction)}>
 
-            {initialCollegiateSubreddits && (
+            {initialCollegiateSubreddit && (
                 <Form.Group className="mb-3" >
                     <Form.Label htmlFor="id">Id</Form.Label>
                     <Form.Control
@@ -39,7 +39,7 @@ function CollegiateSubredditsForm({ initialCollegiateSubreddits, submitAction, b
                         id="id"
                         type="text"
                         {...register("id")}
-                        value={initialCollegiateSubreddits.id}
+                        value={initialCollegiateSubreddit.id}
                         disabled
                     />
                 </Form.Group>
@@ -53,7 +53,7 @@ function CollegiateSubredditsForm({ initialCollegiateSubreddits, submitAction, b
                     type="text"
                     isInvalid={Boolean(errors.name)}
                     {...register("name", {
-                        required: "Name is required."
+                        required: "name is required."
                     })}
                 />
                 <Form.Control.Feedback type="invalid">
@@ -68,26 +68,24 @@ function CollegiateSubredditsForm({ initialCollegiateSubreddits, submitAction, b
                     id="location"
                     type="text"
                     isInvalid={Boolean(errors.location)}
-                    {...register("location", { required: true, pattern: location })}
+                    {...register("location", { required: "location is required."})}
                 />
                 <Form.Control.Feedback type="invalid">
-                    {errors.location && 'Location is required. '}
-                    {errors.location?.type === 'pattern' && 'Location must be a string'}
+                    {errors.location?.message}
                 </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-3" >
-                <Form.Label htmlFor="subreddits">Subreddits (iso format)</Form.Label>
+                <Form.Label htmlFor="subreddit">Subreddit</Form.Label>
                 <Form.Control
-                    data-testid="CollegiateSubredditsForm-subreddits"
-                    id="subreddits"
+                    data-testid="CollegiateSubredditsForm-subreddit"
+                    id="subreddit"
                     type="text"
-                    isInvalid={Boolean(errors.subreddits)}
-                    {...register("subreddits", { required: true })}
+                    isInvalid={Boolean(errors.subreddit)}
+                    {...register("subreddit", { required: "subreddit is required." })}
                 />
                 <Form.Control.Feedback type="invalid">
-                    {errors.subreddits && 'Subreddits is required. '}
-                    {errors.subreddits?.type === 'pattern' && 'Subreddits must be a string'}
+                    {errors.subreddits?.message}
                 </Form.Control.Feedback>
             </Form.Group>
 

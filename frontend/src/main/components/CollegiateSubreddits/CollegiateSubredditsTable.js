@@ -6,7 +6,7 @@ import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/CollegiateS
 import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 
-export default function CollegiateSubredditsTable({ subreddits, currentUser }) {
+export default function CollegiateSubredditsTable({ subreddit, currentUser }) {
 
     const navigate = useNavigate();
 
@@ -53,7 +53,7 @@ export default function CollegiateSubredditsTable({ subreddits, currentUser }) {
 
     // Stryker disable next-line ArrayDeclaration : [columns] is a performance optimization
     const memoizedColumns = React.useMemo(() => columns, [columns]);
-    const memoizedSubreddits = React.useMemo(() => subreddits, [subreddits]);
+    const memoizedSubreddits = React.useMemo(() => subreddit, [subreddit]);
 
     return <OurTable
         data={memoizedSubreddits}

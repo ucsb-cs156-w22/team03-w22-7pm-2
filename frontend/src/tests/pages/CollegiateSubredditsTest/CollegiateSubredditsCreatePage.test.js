@@ -55,9 +55,9 @@ describe("CollegiateSubredditsCreatePage tests", () => {
         const queryClient = new QueryClient();
         const CollegiateSubreddits = {
             id: 1,
-            name: "name",
-            location: "location",
-            subreddits: "subreddits"
+            name: "TestnName(CreatePage)",
+            location: "TestLocation(CreatePage)",
+            subreddit: "TestSubreddit(CreatePage)"
         };
 
         axiosMock.onPost("/api/collegiateSubreddits/post").reply( 202, CollegiateSubreddits );
@@ -76,12 +76,12 @@ describe("CollegiateSubredditsCreatePage tests", () => {
 
         const nameField = getByTestId("CollegiateSubredditsForm-name");
         const locationField = getByTestId("CollegiateSubredditsForm-location");
-        const subredditsField = getByTestId("CollegiateSubredditsForm-subreddits");
+        const subredditField = getByTestId("CollegiateSubredditsForm-subreddit");
         const submitButton = getByTestId("CollegiateSubredditsForm-submit");
 
-        fireEvent.change(nameField, { target: { value: 'name' } });
-        fireEvent.change(locationField, { target: { value: 'location' } });
-        fireEvent.change(subredditsField, { target: { value: 'subreddits' } });
+        fireEvent.change(nameField, { target: { value: 'TestnName(CreatePage)' } });
+        fireEvent.change(locationField, { target: { value: 'TestLocation(CreatePage)' } });
+        fireEvent.change(subredditField, { target: { value: 'TestSubreddit(CreatePage)' } });
 
         expect(submitButton).toBeInTheDocument();
 
@@ -91,12 +91,12 @@ describe("CollegiateSubredditsCreatePage tests", () => {
 
         expect(axiosMock.history.post[0].params).toEqual(
             {
-            "name": "name",
-            "location": "location",
-            "subreddits": "subreddits"
+            "name": "TestnName(CreatePage)",
+            "location": "TestLocation(CreatePage)",
+            "subreddit": "TestSubreddit(CreatePage)"
         });
 
-        expect(mockToast).toBeCalledWith("New collegiateSubreddits Created - id: 1 name: name");
+        expect(mockToast).toBeCalledWith("New collegiateSubreddits Created - id: 1 name: TestnName(CreatePage)");
         expect(mockNavigate).toBeCalledWith({ "to": "/collegiateSubreddits/list" });
     });
 

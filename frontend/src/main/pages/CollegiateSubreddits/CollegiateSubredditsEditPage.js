@@ -5,10 +5,10 @@ import { Navigate } from 'react-router-dom'
 import { useBackend, useBackendMutation } from "main/utils/useBackend";
 import { toast } from "react-toastify";
 
-export default function collegiatesubreddits() {
+export default function collegiateSubreddits() {
   let { id } = useParams();
 
-  const { data: collegiatesubreddits, error: error, status: status } =
+  const { data: collegiateSubreddits, error: error, status: status } =
     useBackend(
       // Stryker disable next-line all : don't test internal caching of React Query
       [`/api/collegiateSubreddits?id=${id}`],
@@ -22,21 +22,21 @@ export default function collegiatesubreddits() {
     );
 
 
-  const objectToAxiosPutParams = (collegiatesubreddits) => ({
+  const objectToAxiosPutParams = (collegiateSubreddits) => ({
     url: "/api/collegiateSubreddits",
     method: "PUT",
     params: {
-      id: collegiatesubreddits.id,
+      id: collegiateSubreddits.id,
     },
     data: {
-      name: collegiatesubreddits.name,
-      location: collegiatesubreddits.location,
-      subreddits: collegiatesubreddits.subreddits
+      name: collegiateSubreddits.name,
+      location: collegiateSubreddits.location,
+      subreddit: collegiateSubreddits.subreddit
     }
   });
 
-  const onSuccess = (collegiatesubreddits) => {
-    toast(`CollegiateSubreddits Updated - id: ${collegiatesubreddits.id} name: ${collegiatesubreddits.name}`);
+  const onSuccess = (collegiateSubreddits) => {
+    toast(`CollegiateSubreddits Updated - id: ${collegiateSubreddits.id} name: ${collegiateSubreddits.name}`);
   }
 
   const mutation = useBackendMutation(
@@ -60,8 +60,8 @@ export default function collegiatesubreddits() {
     <BasicLayout>
       <div className="pt-2">
         <h1>Edit CollegiateSubreddits</h1>
-        {collegiatesubreddits &&
-          <CollegiateSubredditsForm initialCollegiateSubredditsForm={collegiatesubreddits} submitAction={onSubmit} buttonLabel="Update" />
+        {collegiateSubreddits &&
+          <CollegiateSubredditsForm initialCollegiateSubredditsForm={collegiateSubreddits} submitAction={onSubmit} buttonLabel="Update" />
         }
       </div>
     </BasicLayout>

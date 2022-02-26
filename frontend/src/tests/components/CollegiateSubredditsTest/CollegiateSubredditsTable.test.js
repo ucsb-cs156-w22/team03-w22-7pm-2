@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
 
-
 const mockedNavigate = jest.fn();
 
 jest.mock('react-router-dom', () => ({
@@ -13,9 +12,15 @@ jest.mock('react-router-dom', () => ({
     useNavigate: () => mockedNavigate
 }));
 
+const mockedMutate = jest.fn();
+
+jest.mock('main/utils/useBackend', () => ({
+  ...jest.requireActual('main/utils/useBackend'),
+  useBackendMutation: () => ({ mutate: mockedMutate }),
+}));
+
 describe("UserTable tests", () => {
   const queryClient = new QueryClient();
-
 
   test("renders without crashing for empty table with user not logged in", () => {
     const currentUser = null;
@@ -23,7 +28,7 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <CollegiateSubredditsTable subreddits={[]} currentUser={currentUser} />
+          <CollegiateSubredditsTable subreddit={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -35,10 +40,9 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <CollegiateSubredditsTable subreddits={[]} currentUser={currentUser} />
+          <CollegiateSubredditsTable subreddit={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
-
     );
   });
 
@@ -48,28 +52,28 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <CollegiateSubredditsTable subreddits={[]} currentUser={currentUser} />
+          <CollegiateSubredditsTable subreddit={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
-
     );
   });
 
   test("Has the expected colum headers and content for adminUser", () => {
-
     const currentUser = currentUserFixtures.adminUser;
 
     const { getByText, getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <CollegiateSubredditsTable subreddits={CollegiateSubredditsFixtures.threeSubreddits} currentUser={currentUser} />
+          <CollegiateSubredditsTable 
+          subreddit={CollegiateSubredditsFixtures.threeSubreddits} 
+          currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
 
-    const expectedHeaders = ["id", "Name", "Location", "subreddits"];
-    const expectedFields = ["id", "name", "location", "subreddits"];
+    const expectedHeaders = ["id", "Name", "Location", "Subreddit"];
+    const expectedFields = ["id", "name", "location", "subreddit"];
     const testId = "CollegiateSubredditsTable";
 
     expectedHeaders.forEach((headerText) => {
@@ -92,7 +96,6 @@ describe("UserTable tests", () => {
     const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
     expect(deleteButton).toBeInTheDocument();
     expect(deleteButton).toHaveClass("btn-danger");
-
   });
 
   test("Edit button navigates to the edit page for admin user", async () => {
@@ -102,7 +105,7 @@ describe("UserTable tests", () => {
     const { getByText, getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <CollegiateSubredditsTable subreddits={CollegiateSubredditsFixtures.threeSubreddits} currentUser={currentUser} />
+          <CollegiateSubredditsTable subreddit={CollegiateSubredditsFixtures.threeSubreddits} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -115,9 +118,37 @@ describe("UserTable tests", () => {
     
     fireEvent.click(editButton);
 
-    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/CollegiateSubredditsTable/edit/1'));
-
+    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/collegiateSubreddits/edit/1'));
   });
 
+  test('Delete button calls the delete call back', async () => {
+    const currentUser = currentUserFixtures.adminUser;
+
+    const { getByText, getByTestId } = render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <CollegiateSubredditsTable
+            subreddit={CollegiateSubredditsFixtures.threeSubreddits}
+            currentUser={currentUser}
+          />
+        </MemoryRouter>
+      </QueryClientProvider>
+    );
+
+    await waitFor(() => {
+      expect(
+        getByTestId(`CollegiateSubredditsTable-cell-row-0-col-id`)
+      ).toHaveTextContent('1');
+    });
+
+    const deleteButton = getByTestId(
+      `CollegiateSubredditsTable-cell-row-0-col-Delete-button`
+    );
+    expect(deleteButton).toBeInTheDocument();
+
+    fireEvent.click(deleteButton);
+
+    await waitFor(() => expect(mockedMutate).toHaveBeenCalledTimes(1));
+  });
 });
 

@@ -25,7 +25,7 @@ Default.args = {
 export const Show = Template.bind({});
 
 Show.args = {
-    CollegiateSubreddits: CollegiateSubredditsFixtures.oneSubreddit,
+    collegiateSubreddits: CollegiateSubredditsFixtures.oneSubreddit,
     submitText: "",
     submitAction: () => { }
 };

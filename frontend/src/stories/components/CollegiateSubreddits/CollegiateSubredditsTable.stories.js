@@ -23,7 +23,7 @@ Empty.args = {
 export const threeSubreddits = Template.bind({});
 
 threeSubreddits.args = {
-    subreddits: CollegiateSubredditsFixtures.threeSubreddits
+    subreddit: CollegiateSubredditsFixtures.threeSubreddits
 };
 
 

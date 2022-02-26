@@ -21,7 +21,7 @@ export default function CollegiateSubredditsIndexPage() {
     <BasicLayout>
       <div className="pt-2">
         <h1>CollegiateSubreddits</h1>
-        <CollegiateSubredditsTable collegiatesubreddits={collegiateSubreddits} currentUser={currentUser} />
+        <CollegiateSubredditsTable collegiateSubreddits={collegiateSubreddits} currentUser={currentUser} />
       </div>
     </BasicLayout>
   )

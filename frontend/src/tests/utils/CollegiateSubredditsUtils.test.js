@@ -36,16 +36,16 @@ describe("CollegiateSubredditsUtils", () => {
 
         test("It returns the correct params", () => {
             // arrange
-            const cell = { row: { values: { id: 17 } } };
+            const cell = { row: { values: { id: 1 } } };
 
             // act
             const result = cellToAxiosParamsDelete(cell);
 
             // assert
             expect(result).toEqual({
-                url: "/api/collegiatesubreddits",
+                url: "/api/collegiateSubreddits",
                 method: "DELETE",
-                params: { id: 17 }
+                params: { id: 1 }
             });
         });
 

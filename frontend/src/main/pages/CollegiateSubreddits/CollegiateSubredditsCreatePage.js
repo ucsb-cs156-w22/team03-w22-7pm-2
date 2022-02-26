@@ -12,7 +12,7 @@ export default function CollegiateSubredditsCreatePage() {
     params: {
       name: collegiatesubreddits.name,
       location: collegiatesubreddits.location,
-      subreddits: collegiatesubreddits.subreddits
+      subreddit: collegiatesubreddits.subreddit
     }
   });
 
