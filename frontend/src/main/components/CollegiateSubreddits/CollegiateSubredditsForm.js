@@ -85,7 +85,7 @@ function CollegiateSubredditsForm({ initialCollegiateSubreddit, submitAction, bu
                     {...register("subreddit", { required: "subreddit is required." })}
                 />
                 <Form.Control.Feedback type="invalid">
-                    {errors.subreddits?.message}
+                    {errors.subreddit?.message}
                 </Form.Control.Feedback>
             </Form.Group>
 

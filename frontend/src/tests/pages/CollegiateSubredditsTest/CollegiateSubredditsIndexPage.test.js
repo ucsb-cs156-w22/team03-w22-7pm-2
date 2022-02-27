@@ -41,7 +41,7 @@ describe("CollegiateSubredditsIndexPage tests", () => {
         axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.adminUser);
         axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
     };
-
+    
     test("renders without crashing for regular user", () => {
         setupUserOnly();
         const queryClient = new QueryClient();
@@ -54,8 +54,6 @@ describe("CollegiateSubredditsIndexPage tests", () => {
                 </MemoryRouter>
             </QueryClientProvider>
         );
-
-
     });
 
     test("renders without crashing for admin user", () => {
@@ -70,8 +68,6 @@ describe("CollegiateSubredditsIndexPage tests", () => {
                 </MemoryRouter>
             </QueryClientProvider>
         );
-
-
     });
 
     test("renders three subreddits without crashing for regular user", async () => {
@@ -143,7 +139,6 @@ describe("CollegiateSubredditsIndexPage tests", () => {
         const queryClient = new QueryClient();
         axiosMock.onGet("/api/collegiateSubreddits/all").reply(200, CollegiateSubredditsFixtures.threeSubreddits);
         axiosMock.onDelete("/api/collegiateSubreddits").reply(200, "CollegiateSubreddits with id 1 was deleted");
-
 
         const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>

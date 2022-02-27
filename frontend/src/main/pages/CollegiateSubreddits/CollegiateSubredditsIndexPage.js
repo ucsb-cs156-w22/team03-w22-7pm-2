@@ -3,7 +3,7 @@ import { useBackend } from 'main/utils/useBackend';
 
 import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
 import CollegiateSubredditsTable from 'main/components/CollegiateSubreddits/CollegiateSubredditsTable';
-import { useCurrentUser } from 'main/utils/currentUser'
+import { useCurrentUser } from 'main/utils/currentUser';
 
 export default function CollegiateSubredditsIndexPage() {
 
@@ -21,7 +21,7 @@ export default function CollegiateSubredditsIndexPage() {
     <BasicLayout>
       <div className="pt-2">
         <h1>CollegiateSubreddits</h1>
-        <CollegiateSubredditsTable collegiateSubreddits={collegiateSubreddits} currentUser={currentUser} />
+        <CollegiateSubredditsTable collegiateSubreddit={collegiateSubreddits} currentUser={currentUser} />
       </div>
     </BasicLayout>
   )

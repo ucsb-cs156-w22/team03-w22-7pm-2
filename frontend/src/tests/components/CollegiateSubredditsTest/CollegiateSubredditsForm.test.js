@@ -24,7 +24,7 @@ describe("CollegiateSubredditsForm tests", () => {
     test("renders correctly when passing in a CollegiateSubreddits ", async () => {
         const { getByText, getByTestId } = render(
             <Router  >
-                <CollegiateSubredditsForm initialCollegiateSubreddits={CollegiateSubredditsFixtures.oneSubreddit} />
+                <CollegiateSubredditsForm initialCollegiateSubreddit={CollegiateSubredditsFixtures.oneSubreddit} />
             </Router>
         );
         await waitFor(() => expect(getByTestId(/CollegiateSubredditsForm-id/)).toBeInTheDocument());
