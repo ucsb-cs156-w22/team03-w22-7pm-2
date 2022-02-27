@@ -43,7 +43,7 @@ describe("CollegiateSubredditsEditPage tests", () => {
             axiosMock.resetHistory();
             axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.userOnly);
             axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
-            axiosMock.onGet("/api/collegiateSubreddits", { params: { id: 1 } }).timeout();
+            axiosMock.onGet("/api/collegiateSubreddits", { params: { id: 17 } }).timeout();
         });
 
         const queryClient = new QueryClient();
@@ -55,7 +55,7 @@ describe("CollegiateSubredditsEditPage tests", () => {
                     </MemoryRouter>
                 </QueryClientProvider>
             );
-            await waitFor(() => expect(getByText("Edit CollegiateSubreddits")).toBeInTheDocument());
+            await waitFor(() => expect(getByText("Edit CollegiateSubreddit")).toBeInTheDocument());
             expect(queryByTestId("CollegiateSubredditsForm-name")).not.toBeInTheDocument();
         });
     });
@@ -69,14 +69,14 @@ describe("CollegiateSubredditsEditPage tests", () => {
             axiosMock.resetHistory();
             axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.userOnly);
             axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
-            axiosMock.onGet("/api/collegiateSubreddits", { params: { id: 1 } }).reply(200, {
-                id: "1",
+            axiosMock.onGet("/api/collegiateSubreddits", { params: { id: 17 } }).reply(200, {
+                id: 17,
                 name: "name",
                 location: 'location',
                 subreddit: "subreddit"
             });
             axiosMock.onPut('/api/collegiateSubreddits').reply(200, {
-                id: "1",
+                id: "17",
                 name: "name",
                 location: 'location',
                 subreddit: "subreddit"
@@ -112,16 +112,13 @@ describe("CollegiateSubredditsEditPage tests", () => {
             const subredditField = getByTestId("CollegiateSubredditsForm-subreddit");
             const submitButton = getByTestId("CollegiateSubredditsForm-submit");
 
-            expect(idField).toHaveValue("1");
+            expect(idField).toHaveValue("17");
             expect(nameField).toHaveValue("name");
             expect(locationField).toHaveValue("location");
             expect(subredditField).toHaveValue("subreddit");
         });
 
         test("Changes when you click Update", async () => {
-
-
-
             const { getByTestId } = render(
                 <QueryClientProvider client={queryClient}>
                     <MemoryRouter>
@@ -139,7 +136,7 @@ describe("CollegiateSubredditsEditPage tests", () => {
             const submitButton = getByTestId("CollegiateSubredditsForm-submit");
 
 
-            expect(idField).toHaveValue("1");
+            expect(idField).toHaveValue("17");
             expect(nameField).toHaveValue("name");
             expect(locationField).toHaveValue("location");
             expect(subredditField).toHaveValue("subreddit");
@@ -153,11 +150,11 @@ describe("CollegiateSubredditsEditPage tests", () => {
             fireEvent.click(submitButton);
 
             await waitFor(() => expect(mockToast).toBeCalled);
-            expect(mockToast).toBeCalledWith("CollegiateSubreddits Updated - id: 2 location: UCSB");
+            expect(mockToast).toBeCalledWith("CollegiateSubreddit Updated - id: 17 name: name");
             expect(mockNavigate).toBeCalledWith({ "to": "/collegiateSubreddits/list" });
 
             expect(axiosMock.history.put.length).toBe(1); // times called
-            expect(axiosMock.history.put[0].params).toEqual({ id: 1 });
+            expect(axiosMock.history.put[0].params).toEqual({ id: 17 });
             expect(axiosMock.history.put[0].data).toBe(JSON.stringify({
                 name: "New name",
                 location: "UCSB",
