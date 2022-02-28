@@ -94,14 +94,13 @@ public class CollegiateSubredditControllerTests extends ControllerTestCase{
                 .name("Test Name")
                 .location("Test Location")
                 .subreddit("Test Subreddit")
-                .id("0")
                 .build();
 
         when(collegiateSubredditCollection.save(eq(expectedReddit))).thenReturn(expectedReddit);
 
         // act
         MvcResult response = mockMvc.perform(
-                post("/api/collegiateSubreddits/post?id=0&name=Test Name&location=Test Location&subreddit=Test Subreddit")
+                post("/api/collegiateSubreddits/post?name=Test Name&location=Test Location&subreddit=Test Subreddit")
                         .with(csrf()))
                 .andExpect(status().isOk()).andReturn();
 
