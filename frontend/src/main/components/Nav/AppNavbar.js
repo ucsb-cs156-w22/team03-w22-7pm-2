@@ -13,8 +13,8 @@ export default function AppNavbar({
     <>
       {(currentUrl.startsWith('http://localhost:3000') ||
         currentUrl.startsWith('http://127.0.0.1:3000')) && (
-        <AppNavbarLocalhost url={currentUrl} />
-      )}
+          <AppNavbarLocalhost url={currentUrl} />
+        )}
       <Navbar
         expand="xl"
         variant="dark"
@@ -152,30 +152,29 @@ export default function AppNavbar({
             </Nav>
 
             <Nav className="mr-auto">
-              {hasRole(currentUser, 'ROLE_USER') && (
+              {hasRole(currentUser, "ROLE_USER") && (
                 <NavDropdown
                   title="CollegiateSubreddits"
                   id="appnavbar-collegiatesubreddits-dropdown"
                   data-testid="appnavbar-collegiatesubreddits-dropdown"
                 >
                   <NavDropdown.Item
-                    href="/collegiateSubreddits/list"
+                    href="/collegiatesubreddits/list"
                     data-testid="appnavbar-collegiatesubreddits-list"
                   >
                     List
                   </NavDropdown.Item>
-                  {hasRole(currentUser, 'ROLE_ADMIN') && (
-                    <NavDropdown.Item
-                      href="/collegiateSubreddits/create"
+                  {hasRole(currentUser, "ROLE_ADMIN") && (
+                    <NavDropdown.Item 
+                      href="/collegiatesubreddits/create"
                       data-testid="appnavbar-collegiatesubreddits-create"
                     >
                       Create
                     </NavDropdown.Item>
-                  )}
-                </NavDropdown>
+                    )}
+                  </NavDropdown>
               )}
             </Nav>
-
             <Nav className="mr-auto">
               {hasRole(currentUser, 'ROLE_USER') && (
                 <NavDropdown

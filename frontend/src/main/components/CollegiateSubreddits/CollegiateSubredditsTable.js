@@ -6,12 +6,12 @@ import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/CollegiateS
 import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 
-export default function CollegiateSubredditsTable({ subreddit, currentUser }) {
+export default function CollegiateSubredditsTable({ subreddits, currentUser }) {
 
     const navigate = useNavigate();
 
     const editCallback = (cell) => {
-        navigate(`/collegiateSubreddits/edit/${cell.row.values.id}`)//changed
+        navigate(`/collegiateSubreddit/edit/${cell.row.values.id}`)
     }
 
     // Stryker disable all : hard to test for query caching
@@ -19,7 +19,7 @@ export default function CollegiateSubredditsTable({ subreddit, currentUser }) {
     const deleteMutation = useBackendMutation(
         cellToAxiosParamsDelete,
         { onSuccess: onDeleteSuccess },
-        ["/api/collegiateSubreddits/all"]//changed
+        ["/api/collegiateSubreddits/all"]
     );
     // Stryker enable all 
 
@@ -27,7 +27,7 @@ export default function CollegiateSubredditsTable({ subreddit, currentUser }) {
     const deleteCallback = async (cell) => { deleteMutation.mutate(cell); }
 
 
-    const columns = [//changed the inner properties
+    const columns = [
         {
             Header: 'id',
             accessor: 'id', // accessor is the "key" in the data
@@ -47,17 +47,17 @@ export default function CollegiateSubredditsTable({ subreddit, currentUser }) {
     ];
 
     if (hasRole(currentUser, "ROLE_ADMIN")) {
-        columns.push(ButtonColumn("Edit", "primary", editCallback, "CollegiateSubredditsTable"));//changed
-        columns.push(ButtonColumn("Delete", "danger", deleteCallback, "CollegiateSubredditsTable"));//changed
+        columns.push(ButtonColumn("Edit", "primary", editCallback, "CollegiateSubredditsTable"));
+        columns.push(ButtonColumn("Delete", "danger", deleteCallback, "CollegiateSubredditsTable"));
     } 
 
     // Stryker disable next-line ArrayDeclaration : [columns] is a performance optimization
     const memoizedColumns = React.useMemo(() => columns, [columns]);
-    const memoizedSubreddits = React.useMemo(() => subreddit, [subreddit]);
+    const memoizedSubreddits = React.useMemo(() => subreddits, [subreddits]);
 
     return <OurTable
         data={memoizedSubreddits}
         columns={memoizedColumns}
-        testid={"CollegiateSubredditsTable"}//changed
+        testid={"CollegiateSubredditsTable"}
     />;
 };

@@ -12,9 +12,7 @@ jest.mock('react-toastify', () => {
 });
 
 describe("CollegiateSubredditsUtils", () => {
-
     describe("onDeleteSuccess", () => {
-
         test("It puts the message on console.log and in a toast", () => {
             // arrange
             const restoreConsole = mockConsole();
@@ -36,7 +34,7 @@ describe("CollegiateSubredditsUtils", () => {
 
         test("It returns the correct params", () => {
             // arrange
-            const cell = { row: { values: { id: 1 } } };
+            const cell = { row: { values: { id: 99 } } };
 
             // act
             const result = cellToAxiosParamsDelete(cell);
@@ -45,31 +43,8 @@ describe("CollegiateSubredditsUtils", () => {
             expect(result).toEqual({
                 url: "/api/collegiateSubreddits",
                 method: "DELETE",
-                params: { id: 1 }
+                params: { id: 99 }
             });
         });
-
     });
-    // describe("editCallback", () => {
-
-    //     test("It pops up the expected toast", () => {
-    //         // arrange
-    //         const cell = { row: { values: { id: 17, name: "Groundhog Day" } } };
-    //         const expectedToast =  `Edit Callback called on id: 17 name: Groundhog Day`
-
-    //         // act
-    //         const result = editCallback(cell);
-
-    //         // assert
-
-    //         expect(mockToast).toHaveBeenCalledWith(expectedToast);
-           
-    //     });
-
-    // });
 });
-
-
-
-
-

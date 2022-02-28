@@ -6,26 +6,26 @@ import { toast } from "react-toastify";
 
 export default function CollegiateSubredditsCreatePage() {
 
-  const objectToAxiosParams = (collegiatesubreddits) => ({
-    url: "/api/collegiateSubreddits/post",
+  const objectToAxiosParams = (collegiateSubreddit) => ({
+    url: "/api/collegiateSubreddit/post",
     method: "POST",
     params: {
-      name: collegiatesubreddits.name,
-      location: collegiatesubreddits.location,
-      subreddit: collegiatesubreddits.subreddit
+      location: collegiateSubreddit.location,
+      name: collegiateSubreddit.name,
+      subreddit: collegiateSubreddit.subreddit
     }
   });
 
-  const onSuccess = (collegiatesubreddits) => {
-    toast(`New collegiateSubreddits Created - id: ${collegiatesubreddits.id} name: ${collegiatesubreddits.name}`);
+  const onSuccess = (collegiateSubreddit) => {
+    toast(`New collegiateSubreddit Created - id: ${collegiateSubreddit.id} name: ${collegiateSubreddit.name}`);
   }
 
   const mutation = useBackendMutation(
     objectToAxiosParams,
-     { onSuccess }, 
-     // Stryker disable next-line all : hard to set up test for caching
-     ["/api/collegiateSubreddits/all"]
-     );
+    { onSuccess },
+    // Stryker disable next-line all : hard to set up test for caching
+    ["/api/collegiateSubreddits/all"]
+  );
 
   const { isSuccess } = mutation
 
@@ -34,16 +34,14 @@ export default function CollegiateSubredditsCreatePage() {
   }
 
   if (isSuccess) {
-    return <Navigate to="/collegiateSubreddits/list" />
+    return <Navigate to="/collegiatesubreddits/list" />
   }
 
   return (
     <BasicLayout>
       <div className="pt-2">
-        <h1>Create New collegiateSubreddits</h1>
-
+        <h1>Create New CollegiateSubreddit</h1>
         <CollegiateSubredditsForm submitAction={onSubmit} />
-
       </div>
     </BasicLayout>
   )

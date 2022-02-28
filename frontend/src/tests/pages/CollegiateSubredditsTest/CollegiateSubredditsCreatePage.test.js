@@ -29,9 +29,7 @@ jest.mock('react-router-dom', () => {
 });
 
 describe("CollegiateSubredditsCreatePage tests", () => {
-
-    const axiosMock =new AxiosMockAdapter(axios);
-
+    const axiosMock = new AxiosMockAdapter(axios);
     beforeEach(() => {
         axiosMock.reset();
         axiosMock.resetHistory();
@@ -51,16 +49,15 @@ describe("CollegiateSubredditsCreatePage tests", () => {
     });
 
     test("when you fill in the form and hit submit, it makes a request to the backend", async () => {
-
         const queryClient = new QueryClient();
-        const CollegiateSubreddits = {
-            id: 1,
-            name: "TestnName(CreatePage)",
-            location: "TestLocation(CreatePage)",
-            subreddit: "TestSubreddit(CreatePage)"
+        const collegiateSubreddit = {
+            id: 99,
+            name: "Test Name 1",
+            location: "Test Location 1",
+            subreddit: "Test Subreddit 1"
         };
 
-        axiosMock.onPost("/api/collegiateSubreddits/post").reply( 202, CollegiateSubreddits );
+        axiosMock.onPost("/api/collegiateSubreddit/post").reply(202, collegiateSubreddit);
 
         const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
@@ -71,7 +68,7 @@ describe("CollegiateSubredditsCreatePage tests", () => {
         );
 
         await waitFor(() => {
-            expect(getByTestId("CollegiateSubredditsForm-name")).toBeInTheDocument();
+            expect(getByTestId("CollegiateSubredditsForm-location")).toBeInTheDocument();
         });
 
         const nameField = getByTestId("CollegiateSubredditsForm-name");
@@ -79,9 +76,9 @@ describe("CollegiateSubredditsCreatePage tests", () => {
         const subredditField = getByTestId("CollegiateSubredditsForm-subreddit");
         const submitButton = getByTestId("CollegiateSubredditsForm-submit");
 
-        fireEvent.change(nameField, { target: { value: 'TestnName(CreatePage)' } });
-        fireEvent.change(locationField, { target: { value: 'TestLocation(CreatePage)' } });
-        fireEvent.change(subredditField, { target: { value: 'TestSubreddit(CreatePage)' } });
+        fireEvent.change(nameField, { target: { value: 'Test Name 1' } });
+        fireEvent.change(locationField, { target: { value: 'Test Location 1' } });
+        fireEvent.change(subredditField, { target: { value: 'Test Subreddit 1' } });
 
         expect(submitButton).toBeInTheDocument();
 
@@ -91,16 +88,12 @@ describe("CollegiateSubredditsCreatePage tests", () => {
 
         expect(axiosMock.history.post[0].params).toEqual(
             {
-            "name": "TestnName(CreatePage)",
-            "location": "TestLocation(CreatePage)",
-            "subreddit": "TestSubreddit(CreatePage)"
-        });
+                "name": "Test Name 1",
+                "subreddit": "Test Subreddit 1",
+                "location": "Test Location 1"
+            });
 
-        expect(mockToast).toBeCalledWith("New collegiateSubreddits Created - id: 1 name: TestnName(CreatePage)");
-        expect(mockNavigate).toBeCalledWith({ "to": "/collegiateSubreddits/list" });
+        expect(mockToast).toBeCalledWith("New collegiateSubreddit Created - id: 99 name: Test Name 1");
+        expect(mockNavigate).toBeCalledWith({ "to": "/collegiatesubreddits/list" });
     });
-
-
 });
-
-

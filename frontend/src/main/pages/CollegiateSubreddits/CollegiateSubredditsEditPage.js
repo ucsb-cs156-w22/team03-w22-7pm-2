@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 export default function CollegiateSubredditsEditPage() {
   let { id } = useParams();
 
-  const { data: CSreddit, error: error, status: status } =
+  const { data: collegiateSubreddit, error: error, status: status } =
     useBackend(
       // Stryker disable next-line all : don't test internal caching of React Query
       [`/api/collegiateSubreddits?id=${id}`],
@@ -22,21 +22,21 @@ export default function CollegiateSubredditsEditPage() {
     );
 
 
-  const objectToAxiosPutParams = (CSreddit) => ({
+  const objectToAxiosPutParams = (collegiateSubreddit) => ({
     url: "/api/collegiateSubreddits",
     method: "PUT",
     params: {
-      id: CSreddit.id,
+      id: collegiateSubreddit.id,
     },
     data: {
-      name: CSreddit.name,
-      location: CSreddit.location,
-      subreddit: CSreddit.subreddit
+      name: collegiateSubreddit.name,
+      location: collegiateSubreddit.location,
+      subreddit: collegiateSubreddit.subreddit
     }
   });
 
-  const onSuccess = (CSreddit) => {
-    toast(`CollegiateSubreddit Updated - id: ${CSreddit.id} name: ${CSreddit.name}`);
+  const onSuccess = (collegiateSubreddit) => {
+    toast(`CollegiateSubreddit Updated - id: ${collegiateSubreddit.id} name: ${collegiateSubreddit.name}`);
   }
 
   const mutation = useBackendMutation(
@@ -53,18 +53,17 @@ export default function CollegiateSubredditsEditPage() {
   }
 
   if (isSuccess) {
-    return <Navigate to="/collegiateSubreddits/list" />
+    return <Navigate to="/collegiatesubreddits/list" />
   }
 
   return (
     <BasicLayout>
       <div className="pt-2">
         <h1>Edit CollegiateSubreddit</h1>
-        {CSreddit &&
-          <CollegiateSubredditsForm initialCollegiateSubreddit={CSreddit} submitAction={onSubmit} buttonLabel="Update" />
+        {collegiateSubreddit &&
+          <CollegiateSubredditsForm initialCollegiateSubreddit={collegiateSubreddit} submitAction={onSubmit} buttonLabel="Update" />
         }
       </div>
     </BasicLayout>
   )
 }
-

@@ -1,7 +1,6 @@
-
 import React from 'react';
 
-import CollegiateSubredditsCreatePage from 'main/pages/CollegiateSubreddits/CollegiateSubredditsCreatePage';
+import CollegiateSubredditsCreatePage from "main/pages/CollegiateSubreddits/CollegiateSubredditsCreatePage";
 
 export default {
     title: 'pages/CollegiateSubreddits/CollegiateSubredditsCreatePage',
@@ -11,7 +10,4 @@ export default {
 const Template = () => <CollegiateSubredditsCreatePage />;
 
 export const Default = Template.bind({});
-
-
-
 

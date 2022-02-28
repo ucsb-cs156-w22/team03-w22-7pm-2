@@ -1,5 +1,4 @@
 import React from 'react';
-
 import CollegiateSubredditsTable from "main/components/CollegiateSubreddits/CollegiateSubredditsTable";
 import { CollegiateSubredditsFixtures } from 'fixtures/CollegiateSubredditsFixtures';
 
@@ -17,13 +16,10 @@ const Template = (args) => {
 export const Empty = Template.bind({});
 
 Empty.args = {
-    subreddit: []
+    subreddits: []
 };
 
-export const threeSubreddits = Template.bind({});
-
-threeSubreddits.args = {
-    subreddit: CollegiateSubredditsFixtures.threeSubreddits
+export const ThreeSubreddits = Template.bind({});
+ThreeSubreddits.args = {
+    subreddits: CollegiateSubredditsFixtures.threeSubreddits
 };
-
-

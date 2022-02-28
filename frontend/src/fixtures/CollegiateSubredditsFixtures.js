@@ -1,28 +1,28 @@
 const CollegiateSubredditsFixtures = {
     oneSubreddit: {
         "id": 1,
-        "name": "reddit post",
-        "location": "UCSB",
-        "subreddit": "UCSB Subreddits"
+        "name": "subreddit 1",
+        "location": "location 1",
+        "subreddit": "UC 1"
     },
     threeSubreddits: [
         {
             "id": 1,
-            "name": "reddit post 1",
-            "location": "UCSB 1",
-            "subreddit": "UCSB Subreddits 1"
+            "name": "subreddit 1",
+            "location": "location 1",
+            "subreddit": "UC 1"
         },
         {
             "id": 2,
-            "name": "reddit post 2",
-            "location": "UCSB 2",
-            "subreddit": "UCSB Subreddits 2"
+            "name": "subreddit 2",
+            "location": "location 2",
+            "subreddit": "UC 2"
         },
         {
             "id": 3,
-            "name": "reddit post 3",
-            "location": "UCSB 3",
-            "subreddit": "UCSB Subreddits 3"
+            "name": "subreddit 3",
+            "location": "location 3",
+            "subreddit": "UC 3"
         }
     ]
 };

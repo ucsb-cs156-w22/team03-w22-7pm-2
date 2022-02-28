@@ -1,13 +1,11 @@
 import React from 'react';
-
-import CollegiateSubredditsForm from 'main/components/CollegiateSubreddits/CollegiateSubredditsForm';
+import CollegiateSubredditsForm from "main/components/CollegiateSubreddits/CollegiateSubredditsForm";
 import { CollegiateSubredditsFixtures } from 'fixtures/CollegiateSubredditsFixtures';
 
 export default {
     title: 'components/CollegiateSubreddits/CollegiateSubredditsForm',
     component: CollegiateSubredditsForm
 };
-
 
 const Template = (args) => {
     return (
@@ -25,7 +23,7 @@ Default.args = {
 export const Show = Template.bind({});
 
 Show.args = {
-    collegiateSubreddits: CollegiateSubredditsFixtures.oneSubreddit,
+    CollegiateSubreddit: CollegiateSubredditsFixtures.oneSubreddit,
     submitText: "",
     submitAction: () => { }
 };
