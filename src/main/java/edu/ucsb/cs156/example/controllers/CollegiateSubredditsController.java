@@ -64,14 +64,12 @@ public class CollegiateSubredditsController extends ApiController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/post")
     public CollegiateSubreddits postCollegiateSubreddit(
-            @ApiParam("id") @RequestParam String id,
 			@ApiParam("name") @RequestParam String name,
             @ApiParam("location") @RequestParam String location,
             @ApiParam("subreddit") @RequestParam String subreddit) {
         //loggingService.logMethod();
 
         CollegiateSubreddits reddit = new CollegiateSubreddits();
-		reddit.setId(id);
         reddit.setName(name);
         reddit.setLocation(location);
         reddit.setSubreddit(subreddit);

@@ -1,23 +1,22 @@
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import { CollegiateSubredditsFixtures } from "fixtures/CollegiateSubredditsFixtures";
-import CollegiateSubredditsTable from "main/components/CollegiateSubreddits/CollegiateSubredditsTable"
+import CollegiateSubredditsTable from "main/components/CollegiateSubreddits/CollegiateSubredditsTable";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
 
-
 const mockedNavigate = jest.fn();
 
-jest.mock('react-router-dom', () => ({
-    ...jest.requireActual('react-router-dom'),
-    useNavigate: () => mockedNavigate
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: () => mockedNavigate,
 }));
 
 const mockedMutate = jest.fn();
 
-jest.mock('main/utils/useBackend', () => ({
-    ...jest.requireActual('main/utils/useBackend'),
-    useBackendMutation: () => ({mutate: mockedMutate})
+jest.mock("main/utils/useBackend", () => ({
+  ...jest.requireActual("main/utils/useBackend"),
+  useBackendMutation: () => ({ mutate: mockedMutate }),
 }));
 
 describe("UserTable tests", () => {
@@ -28,7 +27,10 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <CollegiateSubredditsTable subreddits={[]} currentUser={currentUser} />
+          <CollegiateSubredditsTable
+            subreddits={[]}
+            currentUser={currentUser}
+          />
         </MemoryRouter>
       </QueryClientProvider>
     );
@@ -38,10 +40,12 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <CollegiateSubredditsTable subreddits={[]} currentUser={currentUser} />
+          <CollegiateSubredditsTable
+            subreddits={[]}
+            currentUser={currentUser}
+          />
         </MemoryRouter>
       </QueryClientProvider>
-
     );
   });
 
@@ -50,7 +54,10 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <CollegiateSubredditsTable subreddits={[]} currentUser={currentUser} />
+          <CollegiateSubredditsTable
+            subreddits={[]}
+            currentUser={currentUser}
+          />
         </MemoryRouter>
       </QueryClientProvider>
     );
@@ -61,7 +68,10 @@ describe("UserTable tests", () => {
     const { getByText, getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <CollegiateSubredditsTable subreddits={CollegiateSubredditsFixtures.threeSubreddits} currentUser={currentUser} />
+          <CollegiateSubredditsTable
+            subreddits={CollegiateSubredditsFixtures.threeSubreddits}
+            currentUser={currentUser}
+          />
         </MemoryRouter>
       </QueryClientProvider>
     );
@@ -80,17 +90,24 @@ describe("UserTable tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
-    expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
+    expect(
+      getByTestId(`${testId}-cell-row-0-col-id`)
+    ).toHaveTextContent("1");
+    expect(
+      getByTestId(`${testId}-cell-row-1-col-id`)
+    ).toHaveTextContent("2");
 
-    const editButton = getByTestId(`${testId}-cell-row-0-col-Edit-button`);
+    const editButton = getByTestId(
+      `${testId}-cell-row-0-col-Edit-button`
+    );
     expect(editButton).toBeInTheDocument();
     expect(editButton).toHaveClass("btn-primary");
 
-    const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+    const deleteButton = getByTestId(
+      `${testId}-cell-row-0-col-Delete-button`
+    );
     expect(deleteButton).toBeInTheDocument();
     expect(deleteButton).toHaveClass("btn-danger");
-
   });
 
   test("Edit button navigates to the edit page for admin user", async () => {
@@ -98,19 +115,32 @@ describe("UserTable tests", () => {
     const { getByText, getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <CollegiateSubredditsTable subreddits={CollegiateSubredditsFixtures.threeSubreddits} currentUser={currentUser} />
+          <CollegiateSubredditsTable
+            subreddits={CollegiateSubredditsFixtures.threeSubreddits}
+            currentUser={currentUser}
+          />
         </MemoryRouter>
       </QueryClientProvider>
     );
 
-    await waitFor(() => { expect(getByTestId(`CollegiateSubredditsTable-cell-row-0-col-id`)).toHaveTextContent("1"); });
+    await waitFor(() => {
+      expect(
+        getByTestId(`CollegiateSubredditsTable-cell-row-0-col-id`)
+      ).toHaveTextContent("1");
+    });
 
-    const editButton = getByTestId(`CollegiateSubredditsTable-cell-row-0-col-Edit-button`);
+    const editButton = getByTestId(
+      `CollegiateSubredditsTable-cell-row-0-col-Edit-button`
+    );
     expect(editButton).toBeInTheDocument();
 
     fireEvent.click(editButton);
 
-    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/collegiateSubreddit/edit/1'));
+    await waitFor(() =>
+      expect(mockedNavigate).toHaveBeenCalledWith(
+        "/collegiateSubreddits/edit/1"
+      )
+    );
   });
 
   test("Delete button calls the delete call back", async () => {
@@ -118,19 +148,29 @@ describe("UserTable tests", () => {
     const { getByText, getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <CollegiateSubredditsTable subreddits={CollegiateSubredditsFixtures.threeSubreddits} currentUser={currentUser} />
+          <CollegiateSubredditsTable
+            subreddits={CollegiateSubredditsFixtures.threeSubreddits}
+            currentUser={currentUser}
+          />
         </MemoryRouter>
       </QueryClientProvider>
     );
 
-    await waitFor(() => { expect(getByTestId(`CollegiateSubredditsTable-cell-row-0-col-id`)).toHaveTextContent("1"); });
+    await waitFor(() => {
+      expect(
+        getByTestId(`CollegiateSubredditsTable-cell-row-0-col-id`)
+      ).toHaveTextContent("1");
+    });
 
-    const deleteButton = getByTestId(`CollegiateSubredditsTable-cell-row-0-col-Delete-button`);
+    const deleteButton = getByTestId(
+      `CollegiateSubredditsTable-cell-row-0-col-Delete-button`
+    );
     expect(deleteButton).toBeInTheDocument();
 
     fireEvent.click(deleteButton);
 
-    await waitFor(() => expect(mockedMutate).toHaveBeenCalledTimes(1));
+    await waitFor(() =>
+      expect(mockedMutate).toHaveBeenCalledTimes(1)
+    );
   });
 });
-
