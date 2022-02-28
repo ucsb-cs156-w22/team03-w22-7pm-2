@@ -1,21 +1,22 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HomePage from 'main/pages/HomePage';
-import ProfilePage from 'main/pages/ProfilePage';
-import AdminUsersPage from 'main/pages/AdminUsersPage';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "main/pages/HomePage";
+import ProfilePage from "main/pages/ProfilePage";
+import AdminUsersPage from "main/pages/AdminUsersPage";
 
-import TodosIndexPage from 'main/pages/Todos/TodosIndexPage';
-import TodosCreatePage from 'main/pages/Todos/TodosCreatePage';
-import TodosEditPage from 'main/pages/Todos/TodosEditPage';
+import TodosIndexPage from "main/pages/Todos/TodosIndexPage";
+import TodosCreatePage from "main/pages/Todos/TodosCreatePage";
+import TodosEditPage from "main/pages/Todos/TodosEditPage";
 
-import UCSBDatesIndexPage from 'main/pages/UCSBDates/UCSBDatesIndexPage';
-import UCSBDatesCreatePage from 'main/pages/UCSBDates/UCSBDatesCreatePage';
-import UCSBDatesEditPage from 'main/pages/UCSBDates/UCSBDatesEditPage';
+import UCSBDatesIndexPage from "main/pages/UCSBDates/UCSBDatesIndexPage";
+import UCSBDatesCreatePage from "main/pages/UCSBDates/UCSBDatesCreatePage";
+import UCSBDatesEditPage from "main/pages/UCSBDates/UCSBDatesEditPage";
 
-import StudentsIndexPage from 'main/pages/Students/StudentsIndexPage';
-import StudentsCreatePage from 'main/pages/Students/StudentsCreatePage';
+import StudentsIndexPage from "main/pages/Students/StudentsIndexPage";
+import StudentsCreatePage from "main/pages/Students/StudentsCreatePage";
 
-import UCSBSubjectsIndexPage from 'main/pages/UCSBSubjects/UCSBSubjectsIndexPage';
-import UCSBSubjectsCreatePage from 'main/pages/UCSBSubjects/UCSBSubjectsCreatePage';
+import UCSBSubjectsIndexPage from "main/pages/UCSBSubjects/UCSBSubjectsIndexPage";
+import UCSBSubjectsCreatePage from "main/pages/UCSBSubjects/UCSBSubjectsCreatePage";
+import UCSBSubjectsEditPage from "main/pages/UCSBSubjects/UCSBSubjectsEditPage";
 
 import CollegiateSubredditsIndexPage from 'main/pages/CollegiateSubreddits/CollegiateSubredditsIndexPage';
 import CollegiateSubredditsCreatePage from 'main/pages/CollegiateSubreddits/CollegiateSubredditsCreatePage';
@@ -23,10 +24,12 @@ import CollegiateSubredditsEditPage from 'main/pages/CollegiateSubreddits/Colleg
 
 import EarthquakesIndexPage from 'main/pages/Earthquakes/EarthquakesIndexPage';
 import EarthquakesRetrievePage from 'main/pages/Earthquakes/EarthquakesRetrievePage';
+import EarthquakesIndexPage from "main/pages/Earthquakes/EarthquakesIndexPage";
+import EarthquakesRetrievePage from "main/pages/Earthquakes/EarthquakesRetrievePage";
 
-import { hasRole, useCurrentUser } from 'main/utils/currentUser';
+import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
-import 'bootstrap/dist/css/bootstrap.css';
+import "bootstrap/dist/css/bootstrap.css";
 
 function App() {
   const { data: currentUser } = useCurrentUser();
@@ -102,11 +105,25 @@ function App() {
 
         {hasRole(currentUser, 'ROLE_ADMIN') && (
           <Route exact path="/admin/users" element={<AdminUsersPage />} />
+        {hasRole(currentUser, "ROLE_ADMIN") && (
+          <Route
+            exact
+            path="/admin/users"
+            element={<AdminUsersPage />}
+          />
         )}
-        {hasRole(currentUser, 'ROLE_USER') && (
+        {hasRole(currentUser, "ROLE_USER") && (
           <>
-            <Route exact path="/todos/list" element={<TodosIndexPage />} />
-            <Route exact path="/todos/create" element={<TodosCreatePage />} />
+            <Route
+              exact
+              path="/todos/list"
+              element={<TodosIndexPage />}
+            />
+            <Route
+              exact
+              path="/todos/create"
+              element={<TodosCreatePage />}
+            />
             <Route
               exact
               path="/todos/edit/:todoId"
@@ -115,7 +132,7 @@ function App() {
           </>
         )}
 
-        {hasRole(currentUser, 'ROLE_USER') && (
+        {hasRole(currentUser, "ROLE_USER") && (
           <>
             <Route
               exact
@@ -124,7 +141,7 @@ function App() {
             />
           </>
         )}
-        {hasRole(currentUser, 'ROLE_ADMIN') && (
+        {hasRole(currentUser, "ROLE_ADMIN") && (
           <>
             <Route
               exact
@@ -134,7 +151,7 @@ function App() {
           </>
         )}
 
-        {hasRole(currentUser, 'ROLE_USER') && (
+        {hasRole(currentUser, "ROLE_USER") && (
           <>
             <Route
               exact
@@ -143,7 +160,7 @@ function App() {
             />
           </>
         )}
-        {hasRole(currentUser, 'ROLE_ADMIN') && (
+        {hasRole(currentUser, "ROLE_ADMIN") && (
           <>
             <Route
               exact
@@ -157,7 +174,7 @@ function App() {
             />
           </>
         )}
-        {hasRole(currentUser, 'ROLE_USER') && (
+        {hasRole(currentUser, "ROLE_USER") && (
           <>
             <Route
               exact
@@ -166,7 +183,7 @@ function App() {
             />
           </>
         )}
-        {hasRole(currentUser, 'ROLE_ADMIN') && (
+        {hasRole(currentUser, "ROLE_ADMIN") && (
           <>
             <Route
               exact
@@ -175,7 +192,7 @@ function App() {
             />
           </>
         )}
-        {hasRole(currentUser, 'ROLE_USER') && (
+        {hasRole(currentUser, "ROLE_USER") && (
           <>
             <Route
               exact
@@ -184,7 +201,7 @@ function App() {
             />
           </>
         )}
-        {hasRole(currentUser, 'ROLE_ADMIN') && (
+        {hasRole(currentUser, "ROLE_ADMIN") && (
           <>
             <Route
               exact
@@ -193,16 +210,16 @@ function App() {
             />
           </>
         )}
-        {hasRole(currentUser, 'ROLE_USER') && (
+        {hasRole(currentUser, "ROLE_ADMIN") && (
           <>
             <Route
               exact
-              path="/UCSBSubjects/list"
-              element={<UCSBSubjectsIndexPage />}
+              path="/UCSBSubjects/edit/:id"
+              element={<UCSBSubjectsEditPage />}
             />
           </>
         )}
-        {hasRole(currentUser, 'ROLE_ADMIN') && (
+        {hasRole(currentUser, "ROLE_ADMIN") && (
           <>
             <Route
               exact
