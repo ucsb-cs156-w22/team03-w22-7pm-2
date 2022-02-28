@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 export default function CollegiateSubredditsCreatePage() {
 
   const objectToAxiosParams = (collegiateSubreddit) => ({
-    url: "/api/collegiateSubreddit/post",
+    url: "/api/collegiateSubreddits/post",
     method: "POST",
     params: {
       location: collegiateSubreddit.location,

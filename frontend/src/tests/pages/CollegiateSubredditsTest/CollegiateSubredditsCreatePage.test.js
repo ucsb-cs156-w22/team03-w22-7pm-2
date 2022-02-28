@@ -57,7 +57,7 @@ describe("CollegiateSubredditsCreatePage tests", () => {
             subreddit: "Test Subreddit 1"
         };
 
-        axiosMock.onPost("/api/collegiateSubreddit/post").reply(202, collegiateSubreddit);
+        axiosMock.onPost("/api/collegiateSubreddits/post").reply(202, collegiateSubreddit);
 
         const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
